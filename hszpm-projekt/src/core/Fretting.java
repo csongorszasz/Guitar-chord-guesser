@@ -17,6 +17,18 @@ public class Fretting {
         this.barreEnd = barreEnd;
     }
 
+    public Fretting(int e1, int a, int d, int g, int b, int e2) {
+        fretNumbers = new int[6];
+        fretNumbers[0] = e1;
+        fretNumbers[1] = a;
+        fretNumbers[2] = d;
+        fretNumbers[3] = g;
+        fretNumbers[4] = b;
+        fretNumbers[5] = e2;
+        this.barreStart = -1;
+        this.barreEnd = -1;
+    }
+
     public int[] getFretNumbers() {
         return fretNumbers;
     }
