@@ -1,5 +1,7 @@
 package core;
 
+import java.awt.*;
+
 public class Settings {
     public static Settings instance;
     private boolean sharpAccidentals;

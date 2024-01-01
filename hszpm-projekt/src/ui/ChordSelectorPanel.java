@@ -1,4 +1,12 @@
 package ui;
 
-public class ChordSelectorPanel {
+import javax.swing.*;
+
+public class ChordSelectorPanel extends JPanel {
+    private LabeledComponent baseComboBox;
+    private LabeledComponent qualityComboBox;
+
+    public ChordSelectorPanel() {
+
+    }
 }

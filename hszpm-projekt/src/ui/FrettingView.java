@@ -1,4 +1,7 @@
 package ui;
 
-public class FrettingView {
+import javax.swing.*;
+
+public class FrettingView extends JPanel {
+
 }
