@@ -1,12 +1,10 @@
+import core.Fretting;
 import core.SoundPlayer;
 
-import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.IOException;
 
 public class Main extends JFrame {
     public Main() {
@@ -15,7 +13,7 @@ public class Main extends JFrame {
         BbButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                SoundPlayer.getInstance().play("audio\\a_1.wav");
+                SoundPlayer.getInstance().playNote("audio\\a_1.wav");
             }
         });
 
@@ -24,7 +22,16 @@ public class Main extends JFrame {
         gButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                SoundPlayer.getInstance().play("audio\\g_0.wav");
+                SoundPlayer.getInstance().playNote("audio\\g_0.wav");
+            }
+        });
+
+        JButton chordButton = new JButton("Chord");
+        add(BorderLayout.CENTER, chordButton);
+        chordButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SoundPlayer.getInstance().playChord(new Fretting(-1, 3, 2, 0, 1, 0));
             }
         });
 

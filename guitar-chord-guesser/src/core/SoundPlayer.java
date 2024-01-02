@@ -9,10 +9,12 @@ import java.util.Map;
 public class SoundPlayer {
     public static SoundPlayer instance;
     private Map<String, Clip> clips;
+    private int strumDelay; // in milliseconds
 
     SoundPlayer() {
         clips = new HashMap<String, Clip>();
         loadAllAudioFiles();
+        strumDelay = 250;
     }
 
     public static SoundPlayer getInstance() {
@@ -22,10 +24,20 @@ public class SoundPlayer {
         return instance;
     }
 
-    public void play(String filepath) {
+    public void playNote(String filepath) {
         Clip clip = clips.get(filepath);
         clip.setFramePosition(0);
         clip.start();
+    }
+
+    public void playChord(Fretting fretting) {
+        for (int i = 0; i < fretting.getFretNumbers().length; i++) {
+            int fretNumber = fretting.getFretNumbers()[i];
+            if (fretNumber != -1) {
+                String filepath = "audio\\" + Fretting.stringNames[i] + "_" + fretNumber + ".wav";
+                SoundPlayer.getInstance().playNote(filepath);
+            }
+        }
     }
 
     private void loadAllAudioFiles() {

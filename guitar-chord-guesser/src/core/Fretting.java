@@ -1,6 +1,7 @@
 package core;
 
 public class Fretting {
+    public static String[] stringNames = {"e1", "a", "d", "g", "b", "e2"};
     private int[] fretNumbers;
     private int barreStart;
     private int barreEnd;
@@ -33,23 +34,11 @@ public class Fretting {
         return fretNumbers;
     }
 
-    public void setFretNumbers(int[] fretNumbers) {
-        this.fretNumbers = fretNumbers;
-    }
-
     public int getBarreStart() {
         return barreStart;
     }
 
-    public void setBarreStart(int barreStart) {
-        this.barreStart = barreStart;
-    }
-
     public int getBarreEnd() {
         return barreEnd;
-    }
-
-    public void setBarreEnd(int barreEnd) {
-        this.barreEnd = barreEnd;
     }
 }
