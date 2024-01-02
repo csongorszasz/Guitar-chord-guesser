@@ -6,9 +6,9 @@ import javax.swing.*;
 import java.awt.*;
 
 public class FrettingViewGrid extends JPanel {
-    private int stringDistance;
-    private int fretDistance;
-    private int stringThickness;
+    private final int stringDistance;
+    private final int fretDistance;
+    private final int stringThickness;
 
     public FrettingViewGrid() {
         setLayout(null);
