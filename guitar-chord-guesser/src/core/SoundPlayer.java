@@ -13,13 +13,42 @@ public class SoundPlayer {
     public static SoundPlayer instance;
     private Map<String, Clip> clips;
     private int strumDelay; // in milliseconds
-    private int currentStringIdx;
+
+    private class StringPlayActionListener implements ActionListener {
+        private int currentStringIdx = 0;
+        private Fretting fretting;
+        private Timer timer;
+
+        public StringPlayActionListener(Fretting fretting, Timer timer) {
+            currentStringIdx = 0;
+            this.fretting = fretting;
+            this.timer = timer;
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            // if the current string need not be played, then jump to the next string, if it's not the last string
+            while (currentStringIdx < 6 && (fretting.getFretNumbers()[currentStringIdx] == Fretting.DONT_PLAY)) {
+                currentStringIdx++;
+            }
+
+            // if it's the last string, then stop, else play the current string's sound
+            if (currentStringIdx == 6) {
+                timer.stop();
+            }
+            else {
+                int fretNumber = fretting.getFretNumbers()[currentStringIdx];
+                String filepath = "audio\\" + Fretting.stringNames[currentStringIdx] + "_" + fretNumber + ".wav";
+                playNote(filepath);
+                currentStringIdx++;
+            }
+        }
+    }
 
     SoundPlayer() {
         clips = new HashMap<String, Clip>();
         loadAllAudioFiles();
         strumDelay = 100;
-        currentStringIdx = 0;
     }
 
     public static SoundPlayer getInstance() {
@@ -36,28 +65,8 @@ public class SoundPlayer {
     }
 
     public void playChord(Fretting fretting) {
-        currentStringIdx = 0;
         Timer timer = new Timer(strumDelay, null);
-        timer.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // if the current string need not be played, then jump to the next string, if it's not the last string
-                while (currentStringIdx < 6 && (fretting.getFretNumbers()[currentStringIdx] == Fretting.DONT_PLAY)) {
-                    currentStringIdx++;
-                }
-
-                // if it's the last string, then stop, else play the current string's sound
-                if (currentStringIdx == 6) {
-                    timer.stop();
-                }
-                else {
-                    int fretNumber = fretting.getFretNumbers()[currentStringIdx];
-                    String filepath = "audio\\" + Fretting.stringNames[currentStringIdx] + "_" + fretNumber + ".wav";
-                    playNote(filepath);
-                    currentStringIdx++;
-                }
-            }
-        });
+        timer.addActionListener(new StringPlayActionListener(fretting, timer));
         timer.start();
     }
 
