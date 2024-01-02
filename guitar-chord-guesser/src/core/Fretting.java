@@ -3,6 +3,9 @@ package core;
 public class Fretting {
     public static final int DONT_PLAY = -1;
     public static final int OPEN_STRING = 0;
+    public static final int NUM_OF_STRINGS = 6;
+    public static final int NUM_OF_FRETS = 20;
+    public static final int NUM_OF_FRETS_PER_VIEW = 5;
 
     public static String[] stringNames = {"e1", "a", "d", "g", "b", "e2"};
     private int[] fretNumbers;

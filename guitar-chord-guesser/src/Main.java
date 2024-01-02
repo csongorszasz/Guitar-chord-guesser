@@ -2,6 +2,7 @@ import core.Fretting;
 import core.SoundPlayer;
 import ui.FrettingView;
 import ui.FrettingViewGrid;
+import ui.QuizPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,7 +11,7 @@ import java.awt.event.ActionListener;
 
 public class Main extends JFrame {
     public Main() {
-        setLayout(new FlowLayout());
+//        setLayout(null);
 //        JButton BbButton = new JButton("Bb");
 //        add(BbButton);
 //        BbButton.addActionListener(new ActionListener() {
@@ -38,15 +39,35 @@ public class Main extends JFrame {
 //            }
 //        });
 
-        Fretting fretting1 = new Fretting(-1, 3, 2, 0, 1, 0);
-        Fretting fretting2 = new Fretting(6, 8, 6, 6, 6, 6);
-//        FrettingView view = new FrettingView(fretting1);
-        FrettingViewGrid gridView = new FrettingViewGrid();
+//        Fretting fretting1 = new Fretting(-1, 3, 2, 0, 1, 0);
+//        Fretting fretting2 = new Fretting(6, 8, 6, 6, 6, 6);
+//        FrettingView view1 = new FrettingView(fretting1);
+//        FrettingView view2 = new FrettingView(fretting2);
+//        FrettingViewGrid gridView = new FrettingViewGrid();
 
-        add(gridView);
+//        view.setBounds(0, 0, 400, 400);
+//        add(view1);
+//        add(view2);
+//        view.repaint();
+
+
+//        setLayout(new GridLayout(3,3));
+
+        JPanel paddingPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 20));
+        paddingPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+
+        JPanel contentPanel = new JPanel(new GridLayout(3, 3));
+
+        QuizPanel quizPanel = new QuizPanel();
+        contentPanel.add(quizPanel,2,0);
+
+        paddingPanel.add(contentPanel);
+
+        add(paddingPanel);
 
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setBounds(500,500,300,300);
+        setExtendedState(MAXIMIZED_BOTH);
+        setResizable(false);
         setVisible(true);
     }
     public static void main(String[] args) {
