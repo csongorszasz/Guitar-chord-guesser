@@ -1,6 +1,9 @@
 package core;
 
 public class Fretting {
+    public static final int DONT_PLAY = -1;
+    public static final int OPEN_STRING = 0;
+
     public static String[] stringNames = {"e1", "a", "d", "g", "b", "e2"};
     private int[] fretNumbers;
     private int barreStart;
