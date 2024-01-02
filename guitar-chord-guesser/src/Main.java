@@ -10,59 +10,26 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Main extends JFrame {
+    private JPanel paddingPanel;
+    private JPanel contentPanel;
+    private QuizPanel quizPanel;
+
     public Main() {
-//        setLayout(null);
-//        JButton BbButton = new JButton("Bb");
-//        add(BbButton);
-//        BbButton.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                SoundPlayer.getInstance().playNote("audio\\a_1.wav");
-//            }
-//        });
-//
-//        JButton gButton = new JButton("G");
-//        add(gButton);
-//        gButton.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                SoundPlayer.getInstance().playNote("audio\\g_0.wav");
-//            }
-//        });
-//
-//        JButton chordButton = new JButton("Chord");
-//        add(chordButton);
-//        chordButton.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                SoundPlayer.getInstance().playChord(new Fretting(6, 8, 6, 6, 6, -1));
-//            }
-//        });
+        /* contentPanel */
+        contentPanel = new JPanel(new GridLayout());
+        quizPanel = new QuizPanel();
 
-//        Fretting fretting1 = new Fretting(-1, 3, 2, 0, 1, 0);
-//        Fretting fretting2 = new Fretting(6, 8, 6, 6, 6, 6);
-//        FrettingView view1 = new FrettingView(fretting1);
-//        FrettingView view2 = new FrettingView(fretting2);
-//        FrettingViewGrid gridView = new FrettingViewGrid();
+        contentPanel.add(quizPanel);
+        /* --------------------------------------------- */
 
-//        view.setBounds(0, 0, 400, 400);
-//        add(view1);
-//        add(view2);
-//        view.repaint();
-
-
-//        setLayout(new GridLayout(3,3));
-
-        JPanel paddingPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 20));
-        paddingPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-
-        JPanel contentPanel = new JPanel(new GridLayout(3, 3));
-
-        QuizPanel quizPanel = new QuizPanel();
-        contentPanel.add(quizPanel,2,0);
-
+        /* paddingPanel */
+        int paddingAmount = 30;
+        paddingPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, paddingAmount, paddingAmount));
+        paddingPanel.setBorder(BorderFactory.createEmptyBorder(paddingAmount, paddingAmount, paddingAmount, paddingAmount));
         paddingPanel.add(contentPanel);
+        /* --------------------------------------------- */
 
+        /* this frame */
         add(paddingPanel);
 
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
