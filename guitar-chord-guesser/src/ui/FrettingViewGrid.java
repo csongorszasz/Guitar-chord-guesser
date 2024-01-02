@@ -25,8 +25,6 @@ public class FrettingViewGrid extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        // draw t
-
         for (int i = 0; i < 6; i++) {
             // draw vertical line
             g.setColor(Color.BLACK);
