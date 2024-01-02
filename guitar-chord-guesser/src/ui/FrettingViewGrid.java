@@ -36,7 +36,7 @@ public class FrettingViewGrid extends JPanel {
         }
     }
 
-//    public Point getFretCoordinates(int stringIdx, int fretIdx) {
-//
-//    }
+    public Point getFretCoordinates(int stringIdx, int fretIdx) {
+        return new Point(stringIdx * stringDistance, fretIdx * fretDistance);
+    }
 }
