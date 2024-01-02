@@ -39,8 +39,13 @@ public class SoundPlayer {
             else {
                 int fretNumber = fretting.getFretNumbers()[currentStringIdx];
                 String filepath = "audio\\" + Fretting.stringNames[currentStringIdx] + "_" + fretNumber + ".wav";
-                playNote(filepath);
-                currentStringIdx++;
+
+                if (!playNote(filepath)) {
+                    timer.stop();
+                }
+                else {
+                    currentStringIdx++;
+                }
             }
         }
     }
@@ -58,10 +63,18 @@ public class SoundPlayer {
         return instance;
     }
 
-    public void playNote(String filepath) {
+    public boolean playNote(String filepath) {
         Clip clip = clips.get(filepath);
+
+        // it the note is already playing, return false
+        if ((0 < clip.getFramePosition()) && (clip.getFramePosition() < clip.getFrameLength())) {
+            return false;
+        }
+
+        // else play the sound
         clip.setFramePosition(0);
         clip.start();
+        return true;
     }
 
     public void playChord(Fretting fretting) {
