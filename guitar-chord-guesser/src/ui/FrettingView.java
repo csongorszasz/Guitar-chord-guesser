@@ -50,31 +50,35 @@ public class FrettingView extends JPanel {
         /* draw barre */
         /* ----------------------------------*/
         if (fretting.getBarreStart() != -1) {
-            int barreLength = fretting.getBarreEnd() - fretting.getBarreStart() + 1;
-            int barreOffsetX = 10;
-            g.setColor(Color.BLACK);
-            g.fillRect(
-                    -barreOffsetX + gridPos.x + fretting.getBarreStart() * viewGrid.getStringDistance(),
-                    gridPos.y + fretting.getBarreFret() * viewGrid.getFretDistance() - viewGrid.getFretDistance()/2,
-                    barreLength * viewGrid.getStringDistance() + 2*barreOffsetX,
-                    10
-            );
+            drawBarre(g);
         }
 
         /* draw fret marks (dots/x's/o's) */
         /* ----------------------------------*/
-        int markSize = 15;
-        int offsetY = 15;
         for (int i = 0; i < Fretting.NUM_OF_STRINGS; i++) {
             int fretNum = fretting.getFretNumbers()[i];
             if (fretNum == -1) {
-                drawX(g, i, markSize, offsetY);
+                drawX(g, i, 15, 15);
             } else if (fretNum == 0) {
-                drawO(g, i, markSize, offsetY);
-            } else {
-                drawDot(g, i, fretNum, markSize, offsetY);
+                drawO(g, i, 15, 15);
+            } else if (fretNum != fretting.getBarreFret()) {
+                drawDot(g, i, fretNum, 20);
             }
         }
+    }
+
+    private void drawBarre(Graphics g) {
+        int barreLength = fretting.getBarreEnd() - fretting.getBarreStart();
+        int barreSize = 10;
+        int barreOffsetX = 10;
+        Point point = viewGrid.getFretCoordinates(fretting.getBarreStart(), fretting.getBarreFret());
+        g.setColor(Color.BLACK);
+        g.fillRect(
+                -barreOffsetX + gridPos.x + point.x,
+                gridPos.y + point.y - viewGrid.getFretDistance()/2 - barreSize/2,
+                barreLength * viewGrid.getStringDistance() + 2*barreOffsetX,
+                barreSize
+        );
     }
 
     private void drawX(Graphics g, int stringNum, int size, int offsetY) {
@@ -106,13 +110,12 @@ public class FrettingView extends JPanel {
         );
     }
 
-    private void drawDot(Graphics g, int stringNum, int fretNum, int size, int offsetY) {
+    private void drawDot(Graphics g, int stringNum, int fretNum, int size) {
         Point point = viewGrid.getFretCoordinates(stringNum, fretNum);
         g.setColor(Color.BLACK);
-        size++; /* to match the size of the X */
         g.fillOval(
                 gridPos.x + point.x - size/2,
-                gridPos.y + point.y - size/2 - offsetY,
+                gridPos.y + point.y - viewGrid.getFretDistance()/2 - size/2,
                 size,
                 size
         );
