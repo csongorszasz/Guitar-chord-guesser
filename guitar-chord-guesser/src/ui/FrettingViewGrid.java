@@ -12,15 +12,13 @@ public class FrettingViewGrid extends JPanel {
 
     public FrettingViewGrid() {
         setLayout(null);
-//        setMinimumSize(new Dimension(200, 250));
-        setPreferredSize(new Dimension(200, 250));
-//        setMaximumSize(new Dimension(200, 250));
+        setPreferredSize(new Dimension(200, 200));
 
         stringDistance = getPreferredSize().width / (Fretting.NUM_OF_STRINGS-1);
         fretDistance = getPreferredSize().height / Fretting.NUM_OF_FRETS_PER_VIEW;
         stringThickness = 2;
 
-        setBorder(BorderFactory.createMatteBorder(stringThickness*3, stringThickness, stringThickness, stringThickness, Color.BLACK));
+        setBorder(BorderFactory.createMatteBorder(stringThickness*4, stringThickness, stringThickness, stringThickness, Color.BLACK));
     }
 
     @Override

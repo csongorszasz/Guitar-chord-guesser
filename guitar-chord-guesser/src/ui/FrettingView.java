@@ -21,15 +21,6 @@ public class FrettingView extends JPanel {
         viewGrid = new FrettingViewGrid();
         this.fretting = fretting;
 
-        startingFret = Fretting.NUM_OF_FRETS;
-        for (int fretNum : fretting.getFretNumbers()) {
-            if (fretNum != -1 && fretNum < startingFret) {
-                startingFret = fretNum;
-            }
-        }
-
-        startingFretLabel = new JLabel(startingFret + "fr");
-
         gridPos = new Point(
                 (this.getPreferredSize().width - viewGrid.getPreferredSize().width) / 2,
                 (this.getPreferredSize().height - viewGrid.getPreferredSize().height) / 2
@@ -41,11 +32,36 @@ public class FrettingView extends JPanel {
                 viewGrid.getPreferredSize().height
         );
         add(viewGrid);
+
+        startingFret = 1;
+        startingFretLabel = new JLabel();
+        startingFretLabel.setFont(new Font(startingFretLabel.getFont().getName(), Font.PLAIN, 30));
+        startingFretLabel.setBounds(
+                gridPos.x + viewGrid.getPreferredSize().width + 15,
+                gridPos.y + viewGrid.getFretDistance()/2 - startingFretLabel.getFont().getSize()/2,
+                50,
+                30
+        );
+        add(startingFretLabel);
     }
 
     @Override
     protected void paintComponent(Graphics g) {
 //        super.paintComponent(g);
+
+        /* draw starting fret label */
+        /* ----------------------------------*/
+        startingFret = Fretting.NUM_OF_FRETS;
+        for (int fretNum : fretting.getFretNumbers()) {
+            if (fretNum != -1 && fretNum < startingFret) {
+                startingFret = fretNum;
+            }
+        }
+        if (startingFret == 0) {
+            startingFretLabel.setText("");
+        } else {
+            startingFretLabel.setText(startingFret + "fr");
+        }
 
         /* draw barre */
         /* ----------------------------------*/
@@ -71,7 +87,7 @@ public class FrettingView extends JPanel {
         int barreLength = fretting.getBarreEnd() - fretting.getBarreStart();
         int barreSize = 10;
         int barreOffsetX = 10;
-        Point point = viewGrid.getFretCoordinates(fretting.getBarreStart(), fretting.getBarreFret());
+        Point point = viewGrid.getFretCoordinates(fretting.getBarreStart(), fretting.getBarreFret()-(startingFret-1));
         g.setColor(Color.BLACK);
         g.fillRect(
                 -barreOffsetX + gridPos.x + point.x,
@@ -111,7 +127,7 @@ public class FrettingView extends JPanel {
     }
 
     private void drawDot(Graphics g, int stringNum, int fretNum, int size) {
-        Point point = viewGrid.getFretCoordinates(stringNum, fretNum);
+        Point point = viewGrid.getFretCoordinates(stringNum, fretNum-(startingFret-1));
         g.setColor(Color.BLACK);
         g.fillOval(
                 gridPos.x + point.x - size/2,
