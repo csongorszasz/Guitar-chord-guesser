@@ -25,7 +25,7 @@ public class FrettingViewGrid extends JPanel {
 
     @Override
     protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
+//        super.paintComponent(g);
 
         for (int i = 0; i < Fretting.NUM_OF_STRINGS; i++) {
             // draw vertical line
@@ -40,5 +40,17 @@ public class FrettingViewGrid extends JPanel {
 
     public Point getFretCoordinates(int stringIdx, int fretIdx) {
         return new Point(stringIdx * stringDistance, fretIdx * fretDistance);
+    }
+
+    public int getStringDistance() {
+        return stringDistance;
+    }
+
+    public int getFretDistance() {
+        return fretDistance;
+    }
+
+    public int getStringThickness() {
+        return stringThickness;
     }
 }

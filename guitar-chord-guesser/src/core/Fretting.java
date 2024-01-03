@@ -11,8 +11,9 @@ public class Fretting {
     private int[] fretNumbers;
     private int barreStart;
     private int barreEnd;
+    private int barreFret;
 
-    public Fretting(int e1, int a, int d, int g, int b, int e2, int barreStart, int barreEnd) {
+    public Fretting(int e1, int a, int d, int g, int b, int e2, int barreStart, int barreEnd, int barreFret) {
         fretNumbers = new int[6];
         fretNumbers[0] = e1;
         fretNumbers[1] = a;
@@ -22,6 +23,7 @@ public class Fretting {
         fretNumbers[5] = e2;
         this.barreStart = barreStart;
         this.barreEnd = barreEnd;
+        this.barreFret = barreFret;
     }
 
     public Fretting(int e1, int a, int d, int g, int b, int e2) {
@@ -34,6 +36,7 @@ public class Fretting {
         fretNumbers[5] = e2;
         this.barreStart = -1;
         this.barreEnd = -1;
+        this.barreFret = -1;
     }
 
     public int[] getFretNumbers() {
@@ -46,5 +49,9 @@ public class Fretting {
 
     public int getBarreEnd() {
         return barreEnd;
+    }
+
+    public int getBarreFret() {
+        return barreFret;
     }
 }
