@@ -50,7 +50,6 @@ public class FrettingView extends JPanel {
 //        super.paintComponent(g);
 
         /* draw starting fret label */
-        /* ----------------------------------*/
         startingFret = Fretting.NUM_OF_FRETS;
         for (int fretNum : fretting.getFretNumbers()) {
             if (fretNum != -1 && fretNum < startingFret) {
@@ -62,15 +61,15 @@ public class FrettingView extends JPanel {
         } else {
             startingFretLabel.setText(startingFret + "fr");
         }
+        /* ----------------------------------*/
 
         /* draw barre */
-        /* ----------------------------------*/
         if (fretting.getBarreStart() != -1) {
             drawBarre(g);
         }
+        /* ----------------------------------*/
 
         /* draw fret marks (dots/x's/o's) */
-        /* ----------------------------------*/
         for (int i = 0; i < Fretting.NUM_OF_STRINGS; i++) {
             int fretNum = fretting.getFretNumbers()[i];
             if (fretNum == -1) {
@@ -81,6 +80,7 @@ public class FrettingView extends JPanel {
                 drawDot(g, i, fretNum, 20);
             }
         }
+        /* ----------------------------------*/
     }
 
     private void drawBarre(Graphics g) {

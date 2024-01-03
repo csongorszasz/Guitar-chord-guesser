@@ -8,9 +8,15 @@ import java.awt.*;
 public class QuizPanel extends JPanel {
     private FrettingView[] views;
     private int num_of_options;
+    private MainFrame mainFrame;
+    private JButton nextButton;
+    private JButton menuButton;
+    private PlayChordButton playChordButton;
 
-    public QuizPanel() {
+    public QuizPanel(MainFrame mainFrame) {
         setLayout(new GridLayout(1, 4));
+
+        this.mainFrame = mainFrame;
 
         num_of_options = 4;
 
