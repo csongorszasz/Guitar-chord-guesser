@@ -1,18 +1,10 @@
 package core;
 
 public class Quality {
-    private String name;
-
-    public Quality(String name) {
-        this.name = name;
-    }
-
-    @Override
-    public String toString() {
-        return name;
-    }
-
-    public String getName() {
-        return name;
-    }
+    public static String MAJOR          = "major";
+    public static String MINOR          = "minor";
+    public static String DOMINANT7      = "7";
+    public static String MAJOR7         = "maj7";
+    public static String MINOR7         = "m7";
+    public static String DIMINISHED     = "dim";
 }

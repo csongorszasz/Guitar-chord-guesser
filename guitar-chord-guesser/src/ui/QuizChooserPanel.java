@@ -37,8 +37,8 @@ public class QuizChooserPanel extends JPanel {
         buttons.add(new JButton("Minor 7th's"));
         buttons.add(new JButton("Diminished"));
 
-        for (int i = 0; i < buttons.size(); i++) {
-            buttonsPanel.add(buttons.get(i));
+        for (JButton button : buttons) {
+            buttonsPanel.add(button);
         }
 
         buttonsPanel.setBorder(BorderFactory.createLineBorder(Color.ORANGE));

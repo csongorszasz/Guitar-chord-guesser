@@ -38,7 +38,7 @@ public class SoundPlayer {
             }
             else {
                 int fretNumber = fretting.getFretNumbers()[currentStringIdx];
-                String filepath = "audio\\" + Fretting.stringNames[currentStringIdx] + "_" + fretNumber + ".wav";
+                String filepath = "audio\\" + Fretting.stringNamesEncoded[currentStringIdx] + "_" + fretNumber + ".wav";
 
                 if (!playNote(filepath)) {
                     timer.stop();

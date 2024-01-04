@@ -1,9 +1,12 @@
 package ui;
 
 import core.Fretting;
+import core.SoundPlayer;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class QuizPanel extends JPanel {
     private FrettingView[] views;
@@ -11,7 +14,7 @@ public class QuizPanel extends JPanel {
     private MainFrame mainFrame;
     private JButton nextButton;
     private JButton menuButton;
-    private PlayChordButton playChordButton;
+    private JButton listenToChordButton;
 
     public QuizPanel(MainFrame mainFrame) {
         setLayout(new GridLayout(1, 4));
@@ -30,5 +33,14 @@ public class QuizPanel extends JPanel {
             views[i] = new FrettingView(fretting);
             add(views[i]);
         }
+
+        listenToChordButton = new JButton("Listen to chord");
+        add(listenToChordButton);
+        listenToChordButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SoundPlayer.getInstance().playChord(/* chord.getFretting */);
+            }
+        });
     }
 }
