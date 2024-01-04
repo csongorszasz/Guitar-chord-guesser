@@ -14,16 +14,16 @@ public class MainMenuPanel extends JPanel {
     private QuizManager quizManager;
 
     private JLabel titleLabel;
-    JPanel buttonsPanel;
+    private JPanel buttonsPanel;
     private List<JButton> modeButtons;
     private JButton statisticsButton;
 
-    public MainMenuPanel(MainFrame mainFrame) {
+    public MainMenuPanel(MainFrame mainFrame, QuizManager quizManager) {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         this.mainFrame = mainFrame;
 
-        quizManager = new QuizManager();
+        this.quizManager = quizManager;
 
         titleLabel = new JLabel("Choose a quiz mode");
         titleLabel.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 40));

@@ -1,11 +1,14 @@
 package ui;
 
+import logic.QuizManager;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class MainFrame extends JFrame {
     private JPanel paddingPanel;
     private JPanel contentPanel;
+    private QuizManager quizManager;
     private QuizPanel quizPanel;
     private MainMenuPanel mainMenuPanel;
     private StatisticsPanel statisticsPanel;
@@ -21,9 +24,10 @@ public class MainFrame extends JFrame {
         layout = new CardLayout();
         cardPanel = new JPanel(layout);
 
-        mainMenuPanel = new MainMenuPanel(this);
+        quizManager = new QuizManager();
+        mainMenuPanel = new MainMenuPanel(this, quizManager);
         statisticsPanel = new StatisticsPanel(this);
-        quizPanel = new QuizPanel(this);
+        quizPanel = new QuizPanel(this, quizManager);
 
         cardPanel.add(quizPanel, VIEW_QUIZ);
         cardPanel.add(mainMenuPanel, VIEW_MAINMENU);

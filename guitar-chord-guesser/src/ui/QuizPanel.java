@@ -8,9 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class QuizPanel extends JPanel {
-    QuizManager quizManager;
-
-    private FrettingView[] views;
+    private QuizManager quizManager;
+    private QuizOptionsGridPanel quizOptionsGridPanel;
     private MainFrame mainFrame;
     private JButton nextButton;
     private JButton menuButton; /* shows up after completing the quiz */
@@ -18,10 +17,14 @@ public class QuizPanel extends JPanel {
     private JButton listenToChordButton;
     private JLabel currentQuestionLabel;
 
-    public QuizPanel(MainFrame mainFrame) {
+    public QuizPanel(MainFrame mainFrame, QuizManager quizManager) {
         setLayout(new GridLayout(1, 4));
 
         this.mainFrame = mainFrame;
+        this.quizManager = quizManager;
+
+        quizOptionsGridPanel = new QuizOptionsGridPanel(quizManager);
+        add(quizOptionsGridPanel);
 
         menuButton = new JButton("Menu");
         menuButton.addActionListener(e -> mainFrame.showLayout(MainFrame.VIEW_MAINMENU));
@@ -31,11 +34,6 @@ public class QuizPanel extends JPanel {
 
 //        views = new FrettingView[num_of_options];
 //        for (int i = 0; i < views.length; i++) {
-            /* choose a random chord based on the quiz mode
-                * in a question all chords need to have the same type of accidentals.
-                  it can't be that one chord is an F# chord and another one is a Bb chord.
-                  Either (F# and A#) OR (Gb and Bb). */
-            /* check that it's unique compared to the already chosen chords */
             /* if it's unique, add it to the view, else choose again */
 //        }
 
