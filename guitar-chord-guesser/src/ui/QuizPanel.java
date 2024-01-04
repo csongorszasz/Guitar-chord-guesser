@@ -11,9 +11,9 @@ public class QuizPanel extends JPanel {
     private QuizManager quizManager;
     private QuizOptionsGridPanel quizOptionsGridPanel;
     private MainFrame mainFrame;
-    private JButton nextButton;
     private JButton menuButton; /* shows up after completing the quiz */
     private JButton leaveButton; /* is visible during the entirety of the quiz */
+    private JButton nextButton; /* is visible during the entirety of the quiz */
     private JButton listenToChordButton;
     private JLabel questionNumberLabel;
     private JLabel currentQuestionLabel;
@@ -45,13 +45,16 @@ public class QuizPanel extends JPanel {
 
         menuButton = new JButton("Back to menu");
         menuButton.addActionListener(e -> {
-            quizManager.saveScore(); /* TODO */
             mainFrame.showLayout(MainFrame.VIEW_MAINMENU);
         });
         menuButton.setVisible(false);
 
         leaveButton = new JButton("Leave quiz");
         leaveButton.addActionListener(e -> mainFrame.showLayout(MainFrame.VIEW_MAINMENU));
+
+        nextButton = new JButton("Next question");
+        nextButton.addActionListener(e -> quizManager.nextQuestion());
+        nextButton.setVisible(false);
 
         listenToChordButton = new JButton("Listen to chord");
         listenToChordButton.addActionListener(new ActionListener() {
@@ -61,14 +64,17 @@ public class QuizPanel extends JPanel {
             }
         });
 
+        /* !!! TODO: need to wrap everything into a CardLayout !!! */
+
         JPanel bottomButtonsPanel = new JPanel();
         bottomButtonsPanel.setLayout(new BoxLayout(bottomButtonsPanel, BoxLayout.X_AXIS));
         bottomButtonsPanel.add(Box.createRigidArea(new Dimension(50, -1)));
         bottomButtonsPanel.add(leaveButton);
         bottomButtonsPanel.add(Box.createHorizontalGlue());
+        bottomButtonsPanel.add(listenToChordButton);
         bottomButtonsPanel.add(menuButton);
         bottomButtonsPanel.add(Box.createHorizontalGlue());
-        bottomButtonsPanel.add(listenToChordButton);
+        bottomButtonsPanel.add(nextButton);
         bottomButtonsPanel.add(Box.createRigidArea(new Dimension(50, -1)));
         add(bottomButtonsPanel);
 
@@ -76,7 +82,15 @@ public class QuizPanel extends JPanel {
     }
 
     public void update() {
-        questionNumberLabel.setText("Question " + quizManager.getQuestionNumber() + "/10");
+        questionNumberLabel.setText("Question " + quizManager.getQuestionNumber() + "/" + quizManager.getNumOfQuestions());
         currentQuestionLabel.setText(quizManager.getChosenChords()[quizManager.getCorrectAnswer()].toString());
+    }
+
+    public void endOfQuiz() {
+        leaveButton.setVisible(false);
+        questionNumberLabel.setVisible(false);
+        menuButton.setVisible(true);
+        currentQuestionLabel.setText("Correctly answered: " + quizManager.getCntCorreclyAnswered() + "/" + quizManager.getNumOfQuestions());
+        quizManager.saveScore(); /* TODO */
     }
 }
