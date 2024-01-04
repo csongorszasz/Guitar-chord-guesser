@@ -62,7 +62,7 @@ public class MainMenuPanel extends JPanel {
         final int quizModeIdx = modeButtons.size();
         button.addActionListener(e -> {
             quizManager.setQuizMode(quizModeIdx);
-            quizManager.nextQuestion();
+            quizManager.startQuiz();
             mainFrame.showLayout(MainFrame.VIEW_QUIZ);
         });
         modeButtons.add(button);

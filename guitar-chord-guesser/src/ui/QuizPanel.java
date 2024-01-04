@@ -33,7 +33,7 @@ public class QuizPanel extends JPanel {
 
         add(Box.createRigidArea(new Dimension(-1, 150)));
         quizOptionsGridPanel = new QuizOptionsGridPanel(quizManager);
-//        quizOptionsGridPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        quizOptionsGridPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
         add(quizOptionsGridPanel);
         add(Box.createRigidArea(new Dimension(-1, 100)));
 
@@ -43,21 +43,35 @@ public class QuizPanel extends JPanel {
         add(currentQuestionLabel);
         add(Box.createRigidArea(new Dimension(-1, 100)));
 
-        menuButton = new JButton("Menu");
-        menuButton.addActionListener(e -> mainFrame.showLayout(MainFrame.VIEW_MAINMENU));
+        menuButton = new JButton("Back to menu");
+        menuButton.addActionListener(e -> {
+            quizManager.saveScore(); /* TODO */
+            mainFrame.showLayout(MainFrame.VIEW_MAINMENU);
+        });
+        menuButton.setVisible(false);
 
         leaveButton = new JButton("Leave quiz");
         leaveButton.addActionListener(e -> mainFrame.showLayout(MainFrame.VIEW_MAINMENU));
 
         listenToChordButton = new JButton("Listen to chord");
-        listenToChordButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         listenToChordButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 SoundPlayer.getInstance().playChord(quizManager.getChosenChords()[quizManager.getCorrectAnswer()].getFretting());
             }
         });
-        add(listenToChordButton);
+
+        JPanel bottomButtonsPanel = new JPanel();
+        bottomButtonsPanel.setLayout(new BoxLayout(bottomButtonsPanel, BoxLayout.X_AXIS));
+        bottomButtonsPanel.add(Box.createRigidArea(new Dimension(50, -1)));
+        bottomButtonsPanel.add(leaveButton);
+        bottomButtonsPanel.add(Box.createHorizontalGlue());
+        bottomButtonsPanel.add(menuButton);
+        bottomButtonsPanel.add(Box.createHorizontalGlue());
+        bottomButtonsPanel.add(listenToChordButton);
+        bottomButtonsPanel.add(Box.createRigidArea(new Dimension(50, -1)));
+        add(bottomButtonsPanel);
+
         add(Box.createRigidArea(new Dimension(-1, 50)));
     }
 

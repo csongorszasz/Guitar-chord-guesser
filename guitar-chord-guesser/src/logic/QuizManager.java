@@ -12,9 +12,12 @@ public class QuizManager {
     private int quizMode;
     private List<String> quizModes;
     private int numOfOptions;
+    private int numOfQuestions;
     private Chord[] chosenChords;
     private int correctAnswer;
     private int questionNumber;
+    private int cntCorreclyAnswered;
+    private boolean quizRunning;
     private List<List<Chord>> chords; /* a list of lists where the inner lists contain chords of the same quality (row1: majors, row2: minors, ...)*/
 
     private QuizPanel quizPanel;
@@ -24,9 +27,12 @@ public class QuizManager {
         random = new Random();
         quizMode = 0;
         numOfOptions = 4;
+        numOfQuestions = 10;
         chosenChords = new Chord[numOfOptions];
         correctAnswer = 0;
         questionNumber = 0;
+        cntCorreclyAnswered = 0;
+        quizRunning = false;
         quizModes = new ArrayList<String>();
 
         try {
@@ -90,6 +96,10 @@ public class QuizManager {
 
     public void setQuestionNumber(int questionNumber) {
         this.questionNumber = questionNumber;
+    }
+
+    public boolean isQuizRunning() {
+        return quizRunning;
     }
 
     private void initChords() throws Exception {
@@ -193,10 +203,21 @@ public class QuizManager {
         return true;
     }
 
+    public void startQuiz() {
+        quizRunning = true;
+        questionNumber = 0;
+        cntCorreclyAnswered = 0;
+        nextQuestion();
+    }
+
     public void nextQuestion() {
         questionNumber++;
         genQuestion();
         quizPanel.update();
         quizOptionsGridPanel.update();
+    }
+
+    public void saveScore() {
+        /* save score into file */
     }
 }
