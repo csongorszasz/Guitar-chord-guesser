@@ -1,6 +1,6 @@
-package core;
+package logic;
 
 public interface ChordFactory {
-    Chord createSimpleChord(String base, Fretting fretting) throws Exception;
+    Chord createNormalChord(String base, Fretting fretting) throws Exception;
     Chord createBarreChord(String base, Fretting fretting) throws Exception;
 }

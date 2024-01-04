@@ -1,4 +1,4 @@
-package core;
+package logic;
 
 public class Fretting {
     public static final int DONT_PLAY = -1;
@@ -6,6 +6,12 @@ public class Fretting {
     public static final int NUM_OF_STRINGS = 6;
     public static final int NUM_OF_FRETS = 20;
     public static final int NUM_OF_FRETS_PER_VIEW = 5;
+    public static final int STRING_E1 = 0;
+    public static final int STRING_A = 1;
+    public static final int STRING_D = 2;
+    public static final int STRING_G = 3;
+    public static final int STRING_B = 4;
+    public static final int STRING_E2 = 5;
     public static String[] stringNamesEncoded = {"e1", "a", "d", "g", "b", "e2"};
 
     private int[] fretNumbers;

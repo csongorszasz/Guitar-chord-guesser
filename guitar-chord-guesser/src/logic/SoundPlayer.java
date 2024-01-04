@@ -1,4 +1,4 @@
-package core;
+package logic;
 
 import javax.sound.sampled.*;
 import javax.swing.*;

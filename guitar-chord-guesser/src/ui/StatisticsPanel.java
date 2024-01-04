@@ -23,7 +23,7 @@ public class StatisticsPanel extends JPanel {
         this.mainFrame = mainFrame;
 
         titleLabel = new JLabel("Statistics");
-        titleLabel.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 30));
+        titleLabel.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 40));
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         add(Box.createRigidArea(new Dimension(0, 100)));
         add(titleLabel);

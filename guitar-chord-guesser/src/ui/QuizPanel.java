@@ -1,7 +1,6 @@
 package ui;
 
-import core.Fretting;
-import core.SoundPlayer;
+import logic.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,11 +8,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class QuizPanel extends JPanel {
+    QuizManager quizManager;
+
     private FrettingView[] views;
-    private int num_of_options;
     private MainFrame mainFrame;
     private JButton nextButton;
-    private JButton menuButton;
+    private JButton menuButton; /* shows up after completing the quiz */
+    private JButton leaveButton; /* is visible during the entirety of the quiz */
     private JButton listenToChordButton;
 
     public QuizPanel(MainFrame mainFrame) {
@@ -21,25 +22,29 @@ public class QuizPanel extends JPanel {
 
         this.mainFrame = mainFrame;
 
-        num_of_options = 4;
+        menuButton = new JButton("Menu");
+        menuButton.addActionListener(e -> mainFrame.showLayout(MainFrame.VIEW_MAINMENU));
 
-        views = new FrettingView[num_of_options];
-        for (int i = 0; i < views.length; i++) {
-//            Fretting fretting = new Fretting(-1, 3, 2, 0, 1, 0);
-//            Fretting fretting = new Fretting(-1, 0, 3, 4, 0, 1, 0, 5, 1);
-//            Fretting fretting = new Fretting(3, 2, 0, 0, 3, 3);
-//            Fretting fretting = new Fretting(3, 2, 0, 0, 3, 3);
-            Fretting fretting = new Fretting(6, 8, 6, 6, 6, -1, 0, 5, 6);
-            views[i] = new FrettingView(fretting);
-            add(views[i]);
-        }
+        leaveButton = new JButton("Leave quiz");
+        leaveButton.addActionListener(e -> mainFrame.showLayout(MainFrame.VIEW_MAINMENU));
+
+//        views = new FrettingView[num_of_options];
+//        for (int i = 0; i < views.length; i++) {
+            /* choose a random chord based on the quiz mode
+                * in a question all chords need to have the same type of accidentals.
+                  it can't be that one chord is an F# chord and another one is a Bb chord.
+                  Either (F# and A#) OR (Gb and Bb). */
+            /* check that it's unique compared to the already chosen chords */
+            /* if it's unique, add it to the view, else choose again */
+//        }
 
         listenToChordButton = new JButton("Listen to chord");
         add(listenToChordButton);
         listenToChordButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                SoundPlayer.getInstance().playChord(/* chord.getFretting */);
+                /* play the chord in question */
+//                SoundPlayer.getInstance().playChord(/* chord.getFretting */);
             }
         });
     }

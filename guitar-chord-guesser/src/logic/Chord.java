@@ -1,4 +1,4 @@
-package core;
+package logic;
 
 public class Chord {
     private String base;

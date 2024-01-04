@@ -1,45 +1,40 @@
 package ui;
 
+import logic.QuizManager;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainMenuPanel extends JPanel {
-    private JButton statisticsButton;
     private MainFrame mainFrame;
+    private QuizManager quizManager;
 
     private JLabel titleLabel;
-
-    /* Majors, Minors, Dominant 7th's, Major 7th's, Minor 7th's, Diminished */
+    JPanel buttonsPanel;
     private List<JButton> modeButtons;
+    private JButton statisticsButton;
 
     public MainMenuPanel(MainFrame mainFrame) {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         this.mainFrame = mainFrame;
 
+        quizManager = new QuizManager();
+
         titleLabel = new JLabel("Choose a quiz mode");
-        titleLabel.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 30));
+        titleLabel.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 40));
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         add(Box.createRigidArea(new Dimension(0, 100)));
         add(titleLabel);
         add(Box.createVerticalGlue());
 
-        JPanel buttonsPanel = new JPanel(new GridLayout(6, 1));
+        buttonsPanel = new JPanel(new GridLayout(0, 1));
         modeButtons = new ArrayList<JButton>();
-        modeButtons.add(new JButton("Majors"));
-        modeButtons.add(new JButton("Minors"));
-        modeButtons.add(new JButton("Dominant 7th's"));
-        modeButtons.add(new JButton("Major 7th's"));
-        modeButtons.add(new JButton("Minor 7th's"));
-        modeButtons.add(new JButton("Diminished"));
-
-        for (int i = 0; i < modeButtons.size(); i++) {
-            buttonsPanel.add(modeButtons.get(i));
-        }
-
-        add(buttonsPanel);
+        addQuizModeButtons();
         add(Box.createVerticalGlue());
 
         statisticsButton = new JButton("Statistics");
@@ -48,5 +43,28 @@ public class MainMenuPanel extends JPanel {
 
         add(statisticsButton);
         add(Box.createRigidArea(new Dimension(0, 100)));
+    }
+
+    private void addQuizModeButtons() {
+        addQuizModeButton("Majors");
+        addQuizModeButton("Minors");
+        addQuizModeButton("Dominant 7th's");
+        addQuizModeButton("Major 7th's");
+        addQuizModeButton("Minor 7th's");
+        addQuizModeButton("Diminished");
+        addQuizModeButton("ALL");
+        add(buttonsPanel);
+    }
+
+    private void addQuizModeButton(String name) {
+        quizManager.addQuizMode(name);
+        JButton button = new JButton(name);
+        button.addActionListener(e -> {
+            quizManager.setQuizMode(modeButtons.size());
+            quizManager.startQuiz();
+            mainFrame.showLayout(MainFrame.VIEW_QUIZ);
+        });
+        modeButtons.add(button);
+        buttonsPanel.add(button);
     }
 }
