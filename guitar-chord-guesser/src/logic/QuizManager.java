@@ -1,5 +1,8 @@
 package logic;
 
+import ui.QuizOptionsGridPanel;
+import ui.QuizPanel;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -11,7 +14,11 @@ public class QuizManager {
     private int numOfOptions;
     private Chord[] chosenChords;
     private int correctAnswer;
+    private int questionNumber;
     private List<List<Chord>> chords; /* a list of lists where the inner lists contain chords of the same quality (row1: majors, row2: minors, ...)*/
+
+    private QuizPanel quizPanel;
+    private QuizOptionsGridPanel quizOptionsGridPanel;
 
     public QuizManager() {
         random = new Random();
@@ -19,6 +26,7 @@ public class QuizManager {
         numOfOptions = 4;
         chosenChords = new Chord[numOfOptions];
         correctAnswer = 0;
+        questionNumber = 0;
         quizModes = new ArrayList<String>();
 
         try {
@@ -58,6 +66,30 @@ public class QuizManager {
 
     public void addQuizMode(String name) {
         quizModes.add(name);
+    }
+
+    public QuizPanel getQuizPanel() {
+        return quizPanel;
+    }
+
+    public void setQuizPanel(QuizPanel quizPanel) {
+        this.quizPanel = quizPanel;
+    }
+
+    public QuizOptionsGridPanel getQuizOptionsGridPanel() {
+        return quizOptionsGridPanel;
+    }
+
+    public void setQuizOptionsGridPanel(QuizOptionsGridPanel quizOptionsGridPanel) {
+        this.quizOptionsGridPanel = quizOptionsGridPanel;
+    }
+
+    public int getQuestionNumber() {
+        return questionNumber;
+    }
+
+    public void setQuestionNumber(int questionNumber) {
+        this.questionNumber = questionNumber;
     }
 
     private void initChords() throws Exception {
@@ -147,7 +179,6 @@ public class QuizManager {
     }
 
     private boolean quizModeIsAll() {
-        System.out.println(quizMode + " - " + (quizModes.size()-1));
         return quizMode == quizModes.size()-1;
     }
 
@@ -163,6 +194,9 @@ public class QuizManager {
     }
 
     public void nextQuestion() {
+        questionNumber++;
         genQuestion();
+        quizPanel.update();
+        quizOptionsGridPanel.update();
     }
 }

@@ -73,19 +73,6 @@ public class Fretting {
         this.barreFret = -1;
     }
 
-    public Fretting() {
-        fretNumbers = new int[6];
-        fretNumbers[0] = -1;
-        fretNumbers[1] = -1;
-        fretNumbers[2] = -1;
-        fretNumbers[3] = -1;
-        fretNumbers[4] = -1;
-        fretNumbers[5] = -1;
-        this.barreStart = -1;
-        this.barreEnd = -1;
-        this.barreFret = -1;
-    }
-
     public int[] getFretNumbers() {
         return fretNumbers;
     }

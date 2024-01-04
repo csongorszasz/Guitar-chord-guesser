@@ -46,7 +46,7 @@ public class FrettingView extends JPanel {
 
     @Override
     protected void paintComponent(Graphics g) {
-//        super.paintComponent(g);
+        super.paintComponent(g);
 
         /* draw starting fret label */
         startingFret = Fretting.NUM_OF_FRETS;

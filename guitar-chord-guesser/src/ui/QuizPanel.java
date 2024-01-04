@@ -15,6 +15,7 @@ public class QuizPanel extends JPanel {
     private JButton menuButton; /* shows up after completing the quiz */
     private JButton leaveButton; /* is visible during the entirety of the quiz */
     private JButton listenToChordButton;
+    private JLabel questionNumberLabel;
     private JLabel currentQuestionLabel;
 
     public QuizPanel(MainFrame mainFrame, QuizManager quizManager) {
@@ -22,9 +23,25 @@ public class QuizPanel extends JPanel {
 
         this.mainFrame = mainFrame;
         this.quizManager = quizManager;
+        this.quizManager.setQuizPanel(this);
 
+        add(Box.createRigidArea(new Dimension(-1, 50)));
+        questionNumberLabel = new JLabel();
+        questionNumberLabel.setFont(new Font(Font.SANS_SERIF, Font.ITALIC, 30));
+        questionNumberLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        add(questionNumberLabel);
+
+        add(Box.createRigidArea(new Dimension(-1, 150)));
         quizOptionsGridPanel = new QuizOptionsGridPanel(quizManager);
+//        quizOptionsGridPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
         add(quizOptionsGridPanel);
+        add(Box.createRigidArea(new Dimension(-1, 100)));
+
+        currentQuestionLabel = new JLabel();
+        currentQuestionLabel.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 70));
+        currentQuestionLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        add(currentQuestionLabel);
+        add(Box.createRigidArea(new Dimension(-1, 100)));
 
         menuButton = new JButton("Menu");
         menuButton.addActionListener(e -> mainFrame.showLayout(MainFrame.VIEW_MAINMENU));
@@ -32,19 +49,20 @@ public class QuizPanel extends JPanel {
         leaveButton = new JButton("Leave quiz");
         leaveButton.addActionListener(e -> mainFrame.showLayout(MainFrame.VIEW_MAINMENU));
 
-//        views = new FrettingView[num_of_options];
-//        for (int i = 0; i < views.length; i++) {
-            /* if it's unique, add it to the view, else choose again */
-//        }
-
         listenToChordButton = new JButton("Listen to chord");
-        add(listenToChordButton);
+        listenToChordButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         listenToChordButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                /* play the chord in question */
-//                SoundPlayer.getInstance().playChord(/* chord.getFretting */);
+                SoundPlayer.getInstance().playChord(quizManager.getChosenChords()[quizManager.getCorrectAnswer()].getFretting());
             }
         });
+        add(listenToChordButton);
+        add(Box.createRigidArea(new Dimension(-1, 50)));
+    }
+
+    public void update() {
+        questionNumberLabel.setText("Question " + quizManager.getQuestionNumber() + "/10");
+        currentQuestionLabel.setText(quizManager.getChosenChords()[quizManager.getCorrectAnswer()].toString());
     }
 }
