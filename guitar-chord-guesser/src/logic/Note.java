@@ -18,4 +18,26 @@ public class Note {
     public final static String GFLAT  = "Gb";
     public final static String AFLAT  = "Ab";
     public final static String BFLAT  = "Bb";
+
+    public static String sharpToFlat(String name) {
+        switch (name) {
+            case CSHARP -> { return DFLAT; }
+            case DSHARP -> { return EFLAT; }
+            case FSHARP -> { return GFLAT; }
+            case GSHARP -> { return AFLAT; }
+            case ASHARP -> { return BFLAT; }
+        }
+        return name;
+    }
+
+    public static String flatToSharp(String name) {
+        switch (name) {
+            case DFLAT -> { return CSHARP; }
+            case EFLAT -> { return DSHARP; }
+            case GFLAT -> { return FSHARP; }
+            case AFLAT -> { return GSHARP; }
+            case BFLAT -> { return ASHARP; }
+        }
+        return name;
+    }
 }

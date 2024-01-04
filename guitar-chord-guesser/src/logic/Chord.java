@@ -11,6 +11,10 @@ public class Chord {
         this.fretting = fretting;
     }
 
+    public void setBase(String base) {
+        this.base = base;
+    }
+
     public String getBase() {
         return base;
     }

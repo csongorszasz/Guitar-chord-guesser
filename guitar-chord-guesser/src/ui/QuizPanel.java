@@ -16,6 +16,7 @@ public class QuizPanel extends JPanel {
     private JButton menuButton; /* shows up after completing the quiz */
     private JButton leaveButton; /* is visible during the entirety of the quiz */
     private JButton listenToChordButton;
+    private JLabel currentQuestionLabel;
 
     public QuizPanel(MainFrame mainFrame) {
         setLayout(new GridLayout(1, 4));
