@@ -5,21 +5,20 @@ import java.util.List;
 import java.util.Random;
 
 public class QuizManager {
+    private Random random;
     private int quizMode;
     private List<String> quizModes;
-
     private int numOfOptions;
     private Chord[] chosenChords;
     private int correctAnswer;
-
     private List<List<Chord>> chords; /* a list of lists where the inner lists contain chords of the same quality (row1: majors, row2: minors, ...)*/
 
-    private Random random;
-
     public QuizManager() {
+        random = new Random();
+        quizMode = 0;
         numOfOptions = 4;
         chosenChords = new Chord[numOfOptions];
-
+        correctAnswer = 0;
         quizModes = new ArrayList<String>();
 
         try {
@@ -27,8 +26,6 @@ public class QuizManager {
         } catch (Exception e) {
             System.err.println("Error: " + e.getMessage());
         }
-
-        random = new Random();
     }
 
     public int getNumOfOptions() {
@@ -86,18 +83,28 @@ public class QuizManager {
 
         /* dominant 7th's */
         chords.add(new ArrayList<Chord>());
+        chords.getLast().add(dominant7ChordFactory.createNormalChord(Note.C, new Fretting(-1, 3, 2, 3, 1, 0)));
+        chords.getLast().add(dominant7ChordFactory.createBarreChord(Note.C, new Fretting(8, 10, 8, 9, 8, 8, Fretting.STRING_E1, Fretting.STRING_E2, 8)));
         /* ----------------------------------- */
 
         /* major 7th's */
         chords.add(new ArrayList<Chord>());
+        chords.getLast().add(major7ChordFactory.createNormalChord(Note.C, new Fretting(-1, -1, 2, 4, 1, 3)));
+        chords.getLast().add(major7ChordFactory.createBarreChord(Note.C, new Fretting(3, 3, 5, 4, 5, 3, Fretting.STRING_E1, Fretting.STRING_E2, 3)));
+        chords.getLast().add(major7ChordFactory.createBarreChord(Note.C, new Fretting(8, 10, 9, 9,  8, 8, Fretting.STRING_E1, Fretting.STRING_E2, 8)));
         /* ----------------------------------- */
 
         /* minor 7th's */
         chords.add(new ArrayList<Chord>());
+        chords.getLast().add(minor7ChordFactory.createBarreChord(Note.C, new Fretting(-1, 3, 1, 3, 1, -1, Fretting.STRING_D, Fretting.STRING_B, 1)));
+        chords.getLast().add(minor7ChordFactory.createBarreChord(Note.C, new Fretting(8, 10, 8, 8, 8, 8, Fretting.STRING_E1, Fretting.STRING_E2, 8)));
         /* ----------------------------------- */
 
         /* diminished */
         chords.add(new ArrayList<Chord>());
+        chords.getLast().add(diminishedChordFactory.createNormalChord(Note.C, new Fretting(-1, 3, 4, 2, 4, -1)));
+        chords.getLast().add(diminishedChordFactory.createNormalChord(Note.C, new Fretting(-1, 9, 10, 8, 10, -1)));
+        chords.getLast().add(diminishedChordFactory.createBarreChord(Note.C, new Fretting(8, -1, 7, 8, 7, -1, Fretting.STRING_D, Fretting.STRING_B, 7)));
         /* ----------------------------------- */
     }
 
@@ -140,6 +147,7 @@ public class QuizManager {
     }
 
     private boolean quizModeIsAll() {
+        System.out.println(quizMode + " - " + (quizModes.size()-1));
         return quizMode == quizModes.size()-1;
     }
 
@@ -154,11 +162,7 @@ public class QuizManager {
         return true;
     }
 
-    public void startQuiz() {
-        if (!quizModeIsAll()) {
-
-        } else {
-
-        }
+    public void nextQuestion() {
+        genQuestion();
     }
 }

@@ -18,7 +18,7 @@ public class QuizPanel extends JPanel {
     private JLabel currentQuestionLabel;
 
     public QuizPanel(MainFrame mainFrame, QuizManager quizManager) {
-        setLayout(new GridLayout(1, 4));
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         this.mainFrame = mainFrame;
         this.quizManager = quizManager;

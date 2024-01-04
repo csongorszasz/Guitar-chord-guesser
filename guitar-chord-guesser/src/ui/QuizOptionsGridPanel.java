@@ -1,5 +1,6 @@
 package ui;
 
+import logic.Fretting;
 import logic.QuizManager;
 
 import javax.swing.*;
@@ -8,17 +9,18 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class QuizOptionsGridPanel extends JPanel {
+    private final int cols;
     private QuizManager quizManager;
     private FrettingView[] cells;
 
     public QuizOptionsGridPanel(QuizManager quizManager) {
         this.quizManager = quizManager;
-        final int cols = quizManager.getNumOfOptions();
+        cols = quizManager.getNumOfOptions();
         setLayout(new GridLayout(1, cols));
 
         cells = new FrettingView[cols];
         for (int i = 0; i < cols; i++) {
-            cells[i] = new FrettingView(quizManager.getChosenChords()[i].getFretting());
+            cells[i] = new FrettingView(new Fretting());
             cells[i].setBorder(BorderFactory.createLineBorder(Color.BLUE));
 
             cells[i].addMouseListener(new MouseAdapter() {
@@ -43,5 +45,13 @@ public class QuizOptionsGridPanel extends JPanel {
 
             add(cells[i]);
         }
+    }
+
+    public void update() {
+        for (int i = 0; i < cols; i++) {
+            cells[i] = new FrettingView(quizManager.getChosenChords()[i].getFretting());
+            cells[i].setBorder(BorderFactory.createLineBorder(Color.BLUE));
+        }
+        repaint();
     }
 }
