@@ -4,93 +4,124 @@ import logic.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.util.List;
 
 public class QuizPanel extends JPanel {
     private QuizManager quizManager;
     private QuizOptionsGridPanel quizOptionsGridPanel;
     private MainFrame mainFrame;
-    private JButton menuButton; /* shows up after completing the quiz */
-    private JButton leaveButton; /* is visible during the entirety of the quiz */
-    private JButton nextButton; /* is visible during the entirety of the quiz */
+    private JPanel buttonsPanel;
+    private JButton menuButton;
+    private JButton leaveButton;
+    private JButton nextButton;
     private JButton listenToChordButton;
     private JLabel questionNumberLabel;
     private JLabel currentQuestionLabel;
+    private JLabel feedbackLabel;
+    private JLabel summaryLabel;
+    private List<Component> rigidAreas;
 
     public QuizPanel(MainFrame mainFrame, QuizManager quizManager) {
-        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-
         this.mainFrame = mainFrame;
         this.quizManager = quizManager;
         this.quizManager.setQuizPanel(this);
 
-        add(Box.createRigidArea(new Dimension(-1, 50)));
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+
         questionNumberLabel = new JLabel();
         questionNumberLabel.setFont(new Font(Font.SANS_SERIF, Font.ITALIC, 30));
         questionNumberLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        add(questionNumberLabel);
 
-        add(Box.createRigidArea(new Dimension(-1, 150)));
         quizOptionsGridPanel = new QuizOptionsGridPanel(quizManager);
         quizOptionsGridPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        add(quizOptionsGridPanel);
-        add(Box.createRigidArea(new Dimension(-1, 100)));
 
         currentQuestionLabel = new JLabel();
         currentQuestionLabel.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 70));
         currentQuestionLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        add(currentQuestionLabel);
-        add(Box.createRigidArea(new Dimension(-1, 100)));
+
+        feedbackLabel = new JLabel();
+        feedbackLabel.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 20));
+        feedbackLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        summaryLabel = new JLabel();
+        summaryLabel.setFont(new Font(Font.SANS_SERIF, Font.ITALIC, 40));
+        summaryLabel.setForeground(new Color(77, 77, 255, 255));
+        summaryLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         menuButton = new JButton("Back to menu");
         menuButton.addActionListener(e -> {
             mainFrame.showLayout(MainFrame.VIEW_MAINMENU);
         });
-        menuButton.setVisible(false);
 
         leaveButton = new JButton("Leave quiz");
         leaveButton.addActionListener(e -> mainFrame.showLayout(MainFrame.VIEW_MAINMENU));
 
         nextButton = new JButton("Next question");
         nextButton.addActionListener(e -> quizManager.nextQuestion());
-        nextButton.setVisible(false);
 
         listenToChordButton = new JButton("Listen to chord");
-        listenToChordButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                SoundPlayer.getInstance().playChord(quizManager.getChosenChords()[quizManager.getCorrectAnswer()].getFretting());
-            }
-        });
+        listenToChordButton.addActionListener(e -> SoundPlayer.getInstance().playChord(quizManager.getChosenChords()[quizManager.getCorrectAnswer()].getFretting()));
 
-        /* !!! TODO: need to wrap everything into a CardLayout !!! */
-
-        JPanel bottomButtonsPanel = new JPanel();
-        bottomButtonsPanel.setLayout(new BoxLayout(bottomButtonsPanel, BoxLayout.X_AXIS));
-        bottomButtonsPanel.add(Box.createRigidArea(new Dimension(50, -1)));
-        bottomButtonsPanel.add(leaveButton);
-        bottomButtonsPanel.add(Box.createHorizontalGlue());
-        bottomButtonsPanel.add(listenToChordButton);
-        bottomButtonsPanel.add(menuButton);
-        bottomButtonsPanel.add(Box.createHorizontalGlue());
-        bottomButtonsPanel.add(nextButton);
-        bottomButtonsPanel.add(Box.createRigidArea(new Dimension(50, -1)));
-        add(bottomButtonsPanel);
-
-        add(Box.createRigidArea(new Dimension(-1, 50)));
+        initView();
     }
 
-    public void update() {
+    private void initView() {
+        add(Box.createRigidArea(new Dimension(0, 100)));
+        add(questionNumberLabel);
+        add(Box.createRigidArea(new Dimension(0, 150)));
+        add(quizOptionsGridPanel);
+        add(Box.createVerticalGlue());
+        add(currentQuestionLabel);
+        add(feedbackLabel);
+        feedbackLabel.setVisible(true);
+        add(summaryLabel);
+        summaryLabel.setVisible(false);
+        add(Box.createVerticalGlue());
+
+        buttonsPanel = new JPanel();
+        buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.X_AXIS));
+        buttonsPanel.add(Box.createHorizontalGlue());
+        buttonsPanel.add(leaveButton);
+        buttonsPanel.add(listenToChordButton);
+        buttonsPanel.add(nextButton);
+        buttonsPanel.add(Box.createHorizontalGlue());
+
+        add(buttonsPanel);
+        add(Box.createRigidArea(new Dimension(0, 50)));
+    }
+
+    public void showQuestionView() {
+        feedbackLabel.setVisible(false);
+        summaryLabel.setVisible(false);
+        nextButton.setEnabled(false);
+    }
+
+    public void showAnsweredView() {
+        feedbackLabel.setVisible(true);
+        nextButton.setEnabled(true);
+    }
+
+    public void showEndedView() {
+        feedbackLabel.setVisible(true);
+        nextButton.setEnabled(false);
+
+        questionNumberLabel.setText("Quiz ended");
+        summaryLabel.setText("Correct answers: " + quizManager.getCntCorreclyAnswered() + "/" + quizManager.getNumOfQuestions());
+        summaryLabel.setVisible(true);
+    }
+
+    public void updateInfoLabels() {
         questionNumberLabel.setText("Question " + quizManager.getQuestionNumber() + "/" + quizManager.getNumOfQuestions());
         currentQuestionLabel.setText(quizManager.getChosenChords()[quizManager.getCorrectAnswer()].toString());
     }
 
-    public void endOfQuiz() {
-        leaveButton.setVisible(false);
-        questionNumberLabel.setVisible(false);
-        menuButton.setVisible(true);
-        currentQuestionLabel.setText("Correctly answered: " + quizManager.getCntCorreclyAnswered() + "/" + quizManager.getNumOfQuestions());
-        quizManager.saveScore(); /* TODO */
+    public void updateFeedbackLabelCorrect() {
+        feedbackLabel.setText("Correct");
+        feedbackLabel.setForeground(new Color(50, 255, 65, 255));
+    }
+
+    public void updateFeedbackLabelWrong() {
+        feedbackLabel.setText("Wrong answer");
+        feedbackLabel.setForeground(new Color(255, 43, 43, 255));
     }
 }

@@ -1,10 +1,8 @@
 package ui;
 
-import logic.Fretting;
 import logic.QuizManager;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -23,7 +21,7 @@ public class QuizOptionsGridPanel extends JPanel {
         originalBg = getBackground();
     }
 
-    public void update() {
+    public void updateGrid() {
         removeAll();
         cells = new FrettingView[cols];
         for (int i = 0; i < cols; i++) {
@@ -34,26 +32,43 @@ public class QuizOptionsGridPanel extends JPanel {
             cells[i].addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
+                    if (quizManager.getPhase() != QuizManager.PHASE_QUESTION) {
+                        return;
+                    }
+
                     super.mouseClicked(e);
                     setCursor(Cursor.getDefaultCursor());
+                    quizManager.answered(idx);
                 }
 
                 @Override
                 public void mouseEntered(MouseEvent e) {
+                    if (quizManager.getPhase() != QuizManager.PHASE_QUESTION) {
+                        return;
+                    }
+
                     super.mouseEntered(e);
                     setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-                    cells[idx].setBorder(BorderFactory.createLineBorder(new Color(100, 100, 251, 255), 5));
+                    setCellBorder(idx, new Color(100, 100, 251, 255), 5);
                 }
 
                 @Override
                 public void mouseExited(MouseEvent e) {
+                    if (quizManager.getPhase() != QuizManager.PHASE_QUESTION) {
+                        return;
+                    }
+
                     super.mouseExited(e);
                     setCursor(Cursor.getDefaultCursor());
-                    cells[idx].setBorder(BorderFactory.createLineBorder(Color.BLACK));
+                    setCellBorder(idx, Color.BLACK, 1);
                 }
             });
 
             add(cells[i]);
         }
+    }
+
+    public void setCellBorder(int cellIdx, Color color, int thickness) {
+        cells[cellIdx].setBorder(BorderFactory.createLineBorder(color, thickness));
     }
 }

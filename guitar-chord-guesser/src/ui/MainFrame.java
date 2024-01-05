@@ -34,16 +34,7 @@ public class MainFrame extends JFrame {
         cardPanel.add(statisticsPanel, VIEW_STATISTICS);
         /* --------------------------------------------- */
 
-        /* paddingPanel */
-        int paddingAmount = 30;
-        paddingPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, paddingAmount, paddingAmount));
-        paddingPanel.setBorder(BorderFactory.createEmptyBorder(paddingAmount, paddingAmount, paddingAmount, paddingAmount));
-        paddingPanel.add(cardPanel);
-        /* --------------------------------------------- */
-
         /* this frame */
-//        add(BorderLayout.CENTER, paddingPanel);
-
         add(BorderLayout.CENTER, cardPanel);
         layout.show(cardPanel, VIEW_MAINMENU);
 

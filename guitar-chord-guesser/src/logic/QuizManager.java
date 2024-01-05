@@ -3,11 +3,16 @@ package logic;
 import ui.QuizOptionsGridPanel;
 import ui.QuizPanel;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 public class QuizManager {
+    public static final int PHASE_QUESTION = 0;
+    public static final int PHASE_ANSWERED = 1;
+    public static final int PHASE_ENDED = 2;
+
     private Random random;
     private int quizMode;
     private List<String> quizModes;
@@ -17,6 +22,7 @@ public class QuizManager {
     private int correctAnswer;
     private int questionNumber;
     private int cntCorreclyAnswered;
+    private int phase;
     private List<List<Chord>> chords; /* a list of lists where the inner lists contain chords of the same quality (row1: majors, row2: minors, ...)*/
 
     private QuizPanel quizPanel;
@@ -26,11 +32,12 @@ public class QuizManager {
         random = new Random();
         quizMode = 0;
         numOfOptions = 4;
-        numOfQuestions = 10;
+        numOfQuestions = 1;
         chosenChords = new Chord[numOfOptions];
         correctAnswer = 0;
         questionNumber = 0;
         cntCorreclyAnswered = 0;
+        phase = PHASE_QUESTION;
         quizModes = new ArrayList<String>();
 
         try {
@@ -106,6 +113,14 @@ public class QuizManager {
 
     public void setCntCorreclyAnswered(int cntCorreclyAnswered) {
         this.cntCorreclyAnswered = cntCorreclyAnswered;
+    }
+
+    public int getPhase() {
+        return phase;
+    }
+
+    public void setPhase(int phase) {
+        this.phase = phase;
     }
 
     private void initChords() throws Exception {
@@ -216,15 +231,32 @@ public class QuizManager {
     }
 
     public void nextQuestion() {
-        if (questionNumber == numOfQuestions) {
-            quizPanel.endOfQuiz();
-            return;
-        }
-
         questionNumber++;
         genQuestion();
-        quizPanel.update();
-        quizOptionsGridPanel.update();
+        quizPanel.showQuestionView();
+        quizPanel.updateInfoLabels();
+        quizOptionsGridPanel.updateGrid();
+        setPhase(PHASE_QUESTION);
+    }
+
+    public void answered(int answer) {
+        setPhase(PHASE_ANSWERED);
+        quizOptionsGridPanel.setCellBorder(correctAnswer, new Color(50, 255, 65, 255), 15);
+        if (answer != correctAnswer) {
+            quizOptionsGridPanel.setCellBorder(answer, new Color(255, 43, 43, 255), 15);
+            quizPanel.updateFeedbackLabelWrong();
+        } else {
+            quizPanel.updateFeedbackLabelCorrect();
+            cntCorreclyAnswered++;
+        }
+
+        if (questionNumber < numOfQuestions) {
+            quizPanel.showAnsweredView();
+        } else {
+            setPhase(PHASE_ENDED);
+            quizPanel.showEndedView();
+            saveScore(); /* TODO */
+        }
     }
 
     public void saveScore() {
