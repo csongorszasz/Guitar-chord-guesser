@@ -260,38 +260,38 @@ public class QuizManager {
         chords.getLast().add(major7ChordFactory.createBarreChord(Note.C, new Fretting(3, 3, 5, 4, 5, 3, Fretting.STRING_E1, Fretting.STRING_E2, 3)));
         chords.getLast().add(major7ChordFactory.createBarreChord(Note.C, new Fretting(8, 10, 9, 9,  8, 8, Fretting.STRING_E1, Fretting.STRING_E2, 8)));
 
-        chords.getLast().add(major7ChordFactory.createNormalChord(Note.CSHARP, new Fretting()));
-        chords.getLast().add(major7ChordFactory.createBarreChord(Note.CSHARP, new Fretting()));
+        chords.getLast().add(major7ChordFactory.createBarreChord(Note.CSHARP, new Fretting(1,4,3,1,1,1,0,5,1)));
+        chords.getLast().add(major7ChordFactory.createBarreChord(Note.CSHARP, new Fretting(9,11,10,10,9,9,0,5,9)));
 
-        chords.getLast().add(major7ChordFactory.createNormalChord(Note.D, new Fretting()));
-        chords.getLast().add(major7ChordFactory.createBarreChord(Note.D, new Fretting()));
+        chords.getLast().add(major7ChordFactory.createBarreChord(Note.D, new Fretting(2,5,4,2,2,2,0,5,2)));
+        chords.getLast().add(major7ChordFactory.createBarreChord(Note.D, new Fretting(10,12,11,11,10,10,0,5,10)));
 
-        chords.getLast().add(major7ChordFactory.createNormalChord(Note.DSHARP, new Fretting()));
-        chords.getLast().add(major7ChordFactory.createBarreChord(Note.DSHARP, new Fretting()));
+        chords.getLast().add(major7ChordFactory.createBarreChord(Note.DSHARP, new Fretting(3,6,5,3,3,3,0,5,3)));
+        chords.getLast().add(major7ChordFactory.createBarreChord(Note.DSHARP, new Fretting(-1,6,8,7,8,6,1,5,6)));
 
-        chords.getLast().add(major7ChordFactory.createNormalChord(Note.E, new Fretting()));
-        chords.getLast().add(major7ChordFactory.createBarreChord(Note.E, new Fretting()));
+        chords.getLast().add(major7ChordFactory.createNormalChord(Note.E, new Fretting(0,2,1,1,0,0)));
+        chords.getLast().add(major7ChordFactory.createBarreChord(Note.E, new Fretting(7,7,9,8,9,7,0,5,7)));
 
-        chords.getLast().add(major7ChordFactory.createNormalChord(Note.F, new Fretting()));
-        chords.getLast().add(major7ChordFactory.createBarreChord(Note.F, new Fretting()));
+        chords.getLast().add(major7ChordFactory.createBarreChord(Note.F, new Fretting(1,3,2,2,1,1,0,5,1)));
+        chords.getLast().add(major7ChordFactory.createBarreChord(Note.F, new Fretting(8,8,10,9,10,8,0,5,8)));
 
-        chords.getLast().add(major7ChordFactory.createNormalChord(Note.FSHARP, new Fretting()));
-        chords.getLast().add(major7ChordFactory.createBarreChord(Note.FSHARP, new Fretting()));
+        chords.getLast().add(major7ChordFactory.createBarreChord(Note.FSHARP, new Fretting(2,4,3,3,2,2,0,5,2)));
+        chords.getLast().add(major7ChordFactory.createBarreChord(Note.FSHARP, new Fretting(-1,9,11,10,11,9,1,5,9)));
 
-        chords.getLast().add(major7ChordFactory.createNormalChord(Note.G, new Fretting()));
-        chords.getLast().add(major7ChordFactory.createBarreChord(Note.G, new Fretting()));
+        chords.getLast().add(major7ChordFactory.createNormalChord(Note.G, new Fretting(-1,2,0,0,0,2)));
+        chords.getLast().add(major7ChordFactory.createBarreChord(Note.G, new Fretting(7,10,9,7,7,7,0,5,7)));
 
-        chords.getLast().add(major7ChordFactory.createNormalChord(Note.GSHARP, new Fretting()));
-        chords.getLast().add(major7ChordFactory.createBarreChord(Note.GSHARP, new Fretting()));
+        chords.getLast().add(major7ChordFactory.createNormalChord(Note.GSHARP, new Fretting(-1,3,1,1,1,3)));
+        chords.getLast().add(major7ChordFactory.createBarreChord(Note.GSHARP, new Fretting(8,11,10,8,8,8,0,5,8)));
 
-        chords.getLast().add(major7ChordFactory.createNormalChord(Note.A, new Fretting()));
-        chords.getLast().add(major7ChordFactory.createBarreChord(Note.A, new Fretting()));
+        chords.getLast().add(major7ChordFactory.createNormalChord(Note.A, new Fretting(-1,0,2,1,2,0)));
+        chords.getLast().add(major7ChordFactory.createBarreChord(Note.A, new Fretting(9,12,11,9,9,9,0,5,9)));
 
-        chords.getLast().add(major7ChordFactory.createNormalChord(Note.ASHARP, new Fretting()));
-        chords.getLast().add(major7ChordFactory.createBarreChord(Note.ASHARP, new Fretting()));
+        chords.getLast().add(major7ChordFactory.createBarreChord(Note.ASHARP, new Fretting(-1,1,3,2,3,1,1,5,1)));
+        chords.getLast().add(major7ChordFactory.createBarreChord(Note.ASHARP, new Fretting(6,8,7,7,6,6,0,5,6)));
 
-        chords.getLast().add(major7ChordFactory.createNormalChord(Note.B, new Fretting()));
-        chords.getLast().add(major7ChordFactory.createBarreChord(Note.B, new Fretting()));
+        chords.getLast().add(major7ChordFactory.createBarreChord(Note.B, new Fretting(-1,2,4,3,4,2,1,5,2)));
+        chords.getLast().add(major7ChordFactory.createBarreChord(Note.B, new Fretting(7,9,8,8,7,7,0,5,7)));
         /* ----------------------------------- */
 
         /* minor 7th's */
@@ -299,38 +299,38 @@ public class QuizManager {
         chords.getLast().add(minor7ChordFactory.createBarreChord(Note.C, new Fretting(-1, 3, 1, 3, 1, -1, Fretting.STRING_D, Fretting.STRING_B, 1)));
         chords.getLast().add(minor7ChordFactory.createBarreChord(Note.C, new Fretting(8, 10, 8, 8, 8, 8, Fretting.STRING_E1, Fretting.STRING_E2, 8)));
 
-        chords.getLast().add(minor7ChordFactory.createNormalChord(Note.CSHARP, new Fretting()));
-        chords.getLast().add(minor7ChordFactory.createBarreChord(Note.CSHARP, new Fretting()));
+        chords.getLast().add(minor7ChordFactory.createBarreChord(Note.CSHARP, new Fretting(-1,4,2,4,2,-1,2,4,2)));
+        chords.getLast().add(minor7ChordFactory.createBarreChord(Note.CSHARP, new Fretting(9,11,9,9,9,9,0,5,9)));
 
-        chords.getLast().add(minor7ChordFactory.createNormalChord(Note.D, new Fretting()));
-        chords.getLast().add(minor7ChordFactory.createBarreChord(Note.D, new Fretting()));
+        chords.getLast().add(minor7ChordFactory.createBarreChord(Note.D, new Fretting(-1,5,3,5,3,-1,2,4,3)));
+        chords.getLast().add(minor7ChordFactory.createBarreChord(Note.D, new Fretting(10,12,10,10,10,10,0,5,10)));
 
-        chords.getLast().add(minor7ChordFactory.createNormalChord(Note.DSHARP, new Fretting()));
-        chords.getLast().add(minor7ChordFactory.createBarreChord(Note.DSHARP, new Fretting()));
+        chords.getLast().add(minor7ChordFactory.createBarreChord(Note.DSHARP, new Fretting(-1,6,4,6,4,-1,2,4,4)));
+        chords.getLast().add(minor7ChordFactory.createBarreChord(Note.DSHARP, new Fretting(-1,6,8,6,7,6,1,5,6)));
 
-        chords.getLast().add(minor7ChordFactory.createNormalChord(Note.E, new Fretting()));
-        chords.getLast().add(minor7ChordFactory.createBarreChord(Note.E, new Fretting()));
+        chords.getLast().add(minor7ChordFactory.createNormalChord(Note.E, new Fretting(0,2,0,0,0,0)));
+        chords.getLast().add(minor7ChordFactory.createBarreChord(Note.E, new Fretting(-1,7,9,7,8,7,1,5,7)));
 
-        chords.getLast().add(minor7ChordFactory.createNormalChord(Note.F, new Fretting()));
-        chords.getLast().add(minor7ChordFactory.createBarreChord(Note.F, new Fretting()));
+        chords.getLast().add(minor7ChordFactory.createBarreChord(Note.F, new Fretting(1,3,1,1,1,1,0,5,1)));
+        chords.getLast().add(minor7ChordFactory.createBarreChord(Note.F, new Fretting(-1,8,10,8,9,8,1,5,8)));
 
-        chords.getLast().add(minor7ChordFactory.createNormalChord(Note.FSHARP, new Fretting()));
-        chords.getLast().add(minor7ChordFactory.createBarreChord(Note.FSHARP, new Fretting()));
+        chords.getLast().add(minor7ChordFactory.createBarreChord(Note.FSHARP, new Fretting(2,4,2,2,2,2,0,5,2)));
+        chords.getLast().add(minor7ChordFactory.createBarreChord(Note.FSHARP, new Fretting(-1,9,11,9,10,9,1,5,9)));
 
-        chords.getLast().add(minor7ChordFactory.createNormalChord(Note.G, new Fretting()));
-        chords.getLast().add(minor7ChordFactory.createBarreChord(Note.G, new Fretting()));
+        chords.getLast().add(minor7ChordFactory.createBarreChord(Note.G, new Fretting(3,5,3,3,3,3,0,5,3)));
+        chords.getLast().add(minor7ChordFactory.createBarreChord(Note.G, new Fretting(-1,10,8,10,8,-1,2,4,8)));
 
-        chords.getLast().add(minor7ChordFactory.createNormalChord(Note.GSHARP, new Fretting()));
-        chords.getLast().add(minor7ChordFactory.createBarreChord(Note.GSHARP, new Fretting()));
+        chords.getLast().add(minor7ChordFactory.createBarreChord(Note.GSHARP, new Fretting(4,6,4,4,4,4,0,5,4)));
+        chords.getLast().add(minor7ChordFactory.createBarreChord(Note.GSHARP, new Fretting(-1,11,9,11,9,-1,2,4,9)));
 
-        chords.getLast().add(minor7ChordFactory.createNormalChord(Note.A, new Fretting()));
-        chords.getLast().add(minor7ChordFactory.createBarreChord(Note.A, new Fretting()));
+        chords.getLast().add(minor7ChordFactory.createNormalChord(Note.A, new Fretting(-1,0,2,0,1,0)));
+        chords.getLast().add(minor7ChordFactory.createBarreChord(Note.A, new Fretting(5,7,5,5,5,5,0,5,5)));
 
-        chords.getLast().add(minor7ChordFactory.createNormalChord(Note.ASHARP, new Fretting()));
-        chords.getLast().add(minor7ChordFactory.createBarreChord(Note.ASHARP, new Fretting()));
+        chords.getLast().add(minor7ChordFactory.createBarreChord(Note.ASHARP, new Fretting(-1,1,3,1,2,1,1,5,1)));
+        chords.getLast().add(minor7ChordFactory.createBarreChord(Note.ASHARP, new Fretting(6,8,6,6,6,6,0,5,6)));
 
-        chords.getLast().add(minor7ChordFactory.createNormalChord(Note.B, new Fretting()));
-        chords.getLast().add(minor7ChordFactory.createBarreChord(Note.B, new Fretting()));
+        chords.getLast().add(minor7ChordFactory.createNormalChord(Note.B, new Fretting(-1,0,0,2,0,2)));
+        chords.getLast().add(minor7ChordFactory.createBarreChord(Note.B, new Fretting(7,9,7,7,7,7,0,5,7)));
         /* ----------------------------------- */
 
         /* diminished */
