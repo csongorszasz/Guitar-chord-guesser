@@ -4,9 +4,12 @@ import ui.QuizOptionsGridPanel;
 import ui.QuizPanel;
 
 import java.awt.*;
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 public class QuizManager {
     public static final int PHASE_QUESTION = 0;
@@ -45,6 +48,8 @@ public class QuizManager {
         } catch (Exception e) {
             System.err.println("Error: " + e.getMessage());
         }
+
+        loadScores();
     }
 
     public int getNumOfOptions() {
@@ -255,11 +260,40 @@ public class QuizManager {
         } else {
             setPhase(PHASE_ENDED);
             quizPanel.showEndedView();
-            saveScore(); /* TODO */
+            saveScore();
         }
     }
 
     public void saveScore() {
-        /* save score into file */
+        /* Row format:
+         *  <quizmode> <correct_answers> */
+
+        try {
+            FileWriter writer = new FileWriter("src\\data\\scores.txt", true);
+            writer.write(quizMode + " " + cntCorreclyAnswered + "\n");
+            writer.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /* this loads past scores into the statistics panel */
+    public void loadScores() {
+        /* Row format:
+        *  <quizmode> <correct_answers> */
+
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("src\\data\\scores.txt"));
+            List<QuizRound> rounds = reader.lines()
+                    .map(line -> {
+                        String[] tokens = line.split(" ");
+                        return new QuizRound(Integer.parseInt(tokens[0]), Integer.parseInt(tokens[1]));
+                    })
+                    .sorted(Comparator.comparing(QuizRound::getQuizMode))
+                    .toList();
+            rounds.forEach(r -> System.out.println(r.getQuizMode() + " " + r.getCorrectAnswers()));
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
