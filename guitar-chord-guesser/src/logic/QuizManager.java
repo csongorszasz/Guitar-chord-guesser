@@ -32,7 +32,7 @@ public class QuizManager {
         random = new Random();
         quizMode = 0;
         numOfOptions = 4;
-        numOfQuestions = 1;
+        numOfQuestions = 2;
         chosenChords = new Chord[numOfOptions];
         correctAnswer = 0;
         questionNumber = 0;

@@ -11,6 +11,7 @@ public class QuizPanel extends JPanel {
     private QuizOptionsGridPanel quizOptionsGridPanel;
     private MainFrame mainFrame;
     private JPanel buttonsPanel;
+    private JPanel topLabelsPanel;
     private JButton menuButton;
     private JButton leaveButton;
     private JButton nextButton;
@@ -66,16 +67,21 @@ public class QuizPanel extends JPanel {
     }
 
     private void initView() {
-        add(Box.createRigidArea(new Dimension(0, 100)));
-        add(questionNumberLabel);
-        add(Box.createRigidArea(new Dimension(0, 150)));
+        topLabelsPanel = new JPanel();
+        topLabelsPanel.setLayout(new BoxLayout(topLabelsPanel, BoxLayout.Y_AXIS));
+        topLabelsPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        topLabelsPanel.add(questionNumberLabel);
+        topLabelsPanel.add(summaryLabel);
+        summaryLabel.setVisible(false);
+
+        add(Box.createVerticalStrut(100));
+        add(topLabelsPanel);
+        add(Box.createVerticalStrut(100));
+
         add(quizOptionsGridPanel);
-        add(Box.createVerticalGlue());
         add(currentQuestionLabel);
         add(feedbackLabel);
         feedbackLabel.setVisible(true);
-        add(summaryLabel);
-        summaryLabel.setVisible(false);
         add(Box.createVerticalGlue());
 
         buttonsPanel = new JPanel();
@@ -88,6 +94,7 @@ public class QuizPanel extends JPanel {
 
         add(buttonsPanel);
         add(Box.createRigidArea(new Dimension(0, 50)));
+
     }
 
     public void showQuestionView() {
@@ -102,10 +109,10 @@ public class QuizPanel extends JPanel {
     }
 
     public void showEndedView() {
-        feedbackLabel.setVisible(true);
         nextButton.setEnabled(false);
-
+        feedbackLabel.setVisible(true);
         questionNumberLabel.setText("Quiz ended");
+
         summaryLabel.setText("Correct answers: " + quizManager.getCntCorreclyAnswered() + "/" + quizManager.getNumOfQuestions());
         summaryLabel.setVisible(true);
     }
