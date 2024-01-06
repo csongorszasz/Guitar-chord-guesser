@@ -8,11 +8,15 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 public class SoundPlayer {
+    private Random random;
     public static SoundPlayer instance;
-    private Map<String, Clip> clips;
+    private Map<String, Clip> noteClips;
+    private Map<String, Clip> musicClips;
     private int strumDelay; // in milliseconds
+    private String currentlyPlayingSong;
 
     private class StringPlayActionListener implements ActionListener {
         private int currentStringIdx = 0;
@@ -38,7 +42,7 @@ public class SoundPlayer {
             }
             else {
                 int fretNumber = fretting.getFretNumbers()[currentStringIdx];
-                String filepath = "audio\\" + Fretting.stringNamesEncoded[currentStringIdx] + "_" + fretNumber + ".wav";
+                String filepath = "audio\\notes\\" + Fretting.stringNamesEncoded[currentStringIdx] + "_" + fretNumber + ".wav";
 
                 if (!playNote(filepath)) {
                     timer.stop();
@@ -51,9 +55,14 @@ public class SoundPlayer {
     }
 
     SoundPlayer() {
-        clips = new HashMap<String, Clip>();
+        random = new Random();
+
+        noteClips = new HashMap<String, Clip>();
+        musicClips = new HashMap<String, Clip>();
         loadAllAudioFiles();
+
         strumDelay = 100;
+        currentlyPlayingSong = "";
     }
 
     public static SoundPlayer getInstance() {
@@ -64,7 +73,7 @@ public class SoundPlayer {
     }
 
     public boolean playNote(String filepath) {
-        Clip clip = clips.get(filepath);
+        Clip clip = noteClips.get(filepath);
 
         // it the note is already playing, return false
         if ((0 < clip.getFramePosition()) && (clip.getFramePosition() < clip.getFrameLength())) {
@@ -83,14 +92,34 @@ public class SoundPlayer {
         timer.start();
     }
 
-    private void loadAllAudioFiles() {
-        File[] guitarSoundFiles = new File("audio").listFiles();
-        if (guitarSoundFiles != null) {
-            for (File file : guitarSoundFiles) {
-                Clip clip = loadAudioFile(file);
-                clips.put(file.getPath(), clip);
+    public void playRandomSong() {
+        int songIdx = random.nextInt(musicClips.size());
+        int i = 0;
+        for (String filepath : musicClips.keySet()) {
+            if (i == songIdx) {
+                playSong(filepath);
+                break;
+            } else {
+                i++;
             }
         }
+    }
+
+    public void playSong(String filepath) {
+        Clip clip = musicClips.get(filepath);
+        currentlyPlayingSong = filepath;
+        clip.loop(Clip.LOOP_CONTINUOUSLY);
+        clip.start();
+    }
+
+    public void stopCurrentlyPlayingSong() {
+        Clip clip = musicClips.get(currentlyPlayingSong);
+        clip.stop();
+    }
+
+    private void loadAllAudioFiles() {
+        loadNoteSoundFiles();
+        loadMusicFiles();
     }
 
     private Clip loadAudioFile(File file) {
@@ -103,5 +132,25 @@ public class SoundPlayer {
             System.out.println(e);
         }
         return null;
+    }
+
+    private void loadNoteSoundFiles() {
+        File[] guitarSoundFiles = new File("audio\\notes").listFiles();
+        if (guitarSoundFiles != null) {
+            for (File file : guitarSoundFiles) {
+                Clip clip = loadAudioFile(file);
+                noteClips.put(file.getPath(), clip);
+            }
+        }
+    }
+
+    private void loadMusicFiles() {
+        File[] guitarMusicFiles = new File("audio\\music").listFiles();
+        if (guitarMusicFiles != null) {
+            for (File file : guitarMusicFiles) {
+                Clip clip = loadAudioFile(file);
+                musicClips.put(file.getPath(), clip);
+            }
+        }
     }
 }

@@ -439,6 +439,7 @@ public class QuizManager {
     }
 
     public void startQuiz() {
+        SoundPlayer.getInstance().stopCurrentlyPlayingSong();
         questionNumber = 0;
         cntCorreclyAnswered = 0;
         nextQuestion();
@@ -479,7 +480,7 @@ public class QuizManager {
 
         scores.add(new QuizRound(quizMode, cntCorreclyAnswered));
         try {
-            FileWriter writer = new FileWriter("src\\data\\scores.txt", true);
+            FileWriter writer = new FileWriter("data\\scores.txt", true);
             writer.write(quizMode + " " + cntCorreclyAnswered + "\n");
             writer.close();
         } catch (IOException e) {
@@ -492,7 +493,7 @@ public class QuizManager {
         *  <quizmode> <correct_answers> */
 
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("src\\data\\scores.txt"));
+            BufferedReader reader = new BufferedReader(new FileReader("data\\scores.txt"));
             scores = reader.lines()
                     .map(line -> {
                         String[] tokens = line.split(" ");

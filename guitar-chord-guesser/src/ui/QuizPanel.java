@@ -52,10 +52,14 @@ public class QuizPanel extends JPanel {
         menuButton = new JButton("Back to menu");
         menuButton.addActionListener(e -> {
             mainFrame.showLayout(MainFrame.VIEW_MAINMENU);
+            SoundPlayer.getInstance().playRandomSong();
         });
 
         leaveButton = new JButton("Leave quiz");
-        leaveButton.addActionListener(e -> mainFrame.showLayout(MainFrame.VIEW_MAINMENU));
+        leaveButton.addActionListener(e -> {
+            mainFrame.showLayout(MainFrame.VIEW_MAINMENU);
+            SoundPlayer.getInstance().playRandomSong();
+        });
 
         nextButton = new JButton("Next question");
         nextButton.addActionListener(e -> quizManager.nextQuestion());

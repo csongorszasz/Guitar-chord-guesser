@@ -1,6 +1,7 @@
 package ui;
 
 import logic.QuizManager;
+import logic.SoundPlayer;
 
 import javax.swing.*;
 import java.awt.*;
@@ -38,6 +39,8 @@ public class MainFrame extends JFrame {
         /* this frame */
         add(BorderLayout.CENTER, cardPanel);
         layout.show(cardPanel, VIEW_MAINMENU);
+
+        SoundPlayer.getInstance().playRandomSong();
 
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setExtendedState(MAXIMIZED_BOTH);
