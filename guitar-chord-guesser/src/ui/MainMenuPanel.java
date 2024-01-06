@@ -4,8 +4,6 @@ import logic.QuizManager;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +31,7 @@ public class MainMenuPanel extends JPanel {
         add(Box.createVerticalGlue());
 
         buttonsPanel = new JPanel(new GridLayout(0, 1));
-        modeButtons = new ArrayList<JButton>();
+        modeButtons = new ArrayList<>();
         addQuizModeButtons();
         add(Box.createVerticalGlue());
 

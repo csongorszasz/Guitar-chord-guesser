@@ -4,7 +4,6 @@ import logic.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.List;
 
 public class QuizPanel extends JPanel {
     private QuizManager quizManager;
@@ -20,7 +19,6 @@ public class QuizPanel extends JPanel {
     private JLabel currentQuestionLabel;
     private JLabel feedbackLabel;
     private JLabel summaryLabel;
-    private List<Component> rigidAreas;
 
     public QuizPanel(MainFrame mainFrame, QuizManager quizManager) {
         this.mainFrame = mainFrame;

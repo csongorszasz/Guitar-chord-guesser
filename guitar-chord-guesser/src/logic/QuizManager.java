@@ -2,12 +2,10 @@ package logic;
 
 import ui.QuizOptionsGridPanel;
 import ui.QuizPanel;
-import ui.StatisticsPanel;
 
 import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -20,8 +18,8 @@ public class QuizManager {
     private Random random;
     private int quizMode;
     private List<String> quizModes;
-    private int numOfOptions;
-    private int numOfQuestions;
+    private final int numOfOptions;
+    private final int numOfQuestions;
     private Chord[] chosenChords;
     private int correctAnswer;
     private int questionNumber;

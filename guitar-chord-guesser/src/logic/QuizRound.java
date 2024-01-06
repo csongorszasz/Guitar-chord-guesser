@@ -1,8 +1,8 @@
 package logic;
 
 public class QuizRound {
-    private int quizMode;
-    private int correctAnswers;
+    private final int quizMode;
+    private final int correctAnswers;
 
     public QuizRound(int quizMode, int correctAnswers) {
         this.quizMode = quizMode;

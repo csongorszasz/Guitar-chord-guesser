@@ -2,8 +2,8 @@ package logic;
 
 public class Chord {
     private String base;
-    private String quality;
-    private Fretting fretting;
+    private final String quality;
+    private final Fretting fretting;
 
     public Chord(String base, String quality, Fretting fretting) {
         this.base = base;

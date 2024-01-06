@@ -11,14 +11,12 @@ public class QuizOptionsGridPanel extends JPanel {
     private final int cols;
     private QuizManager quizManager;
     private FrettingView[] cells;
-    private Color originalBg;
 
     public QuizOptionsGridPanel(QuizManager quizManager) {
         this.quizManager = quizManager;
         this.quizManager.setQuizOptionsGridPanel(this);
         cols = quizManager.getNumOfOptions();
         setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
-        originalBg = getBackground();
     }
 
     public void updateGrid() {

@@ -6,11 +6,11 @@ import javax.swing.*;
 import java.awt.*;
 
 public class FrettingView extends JPanel {
-    private FrettingViewGrid viewGrid;
-    private Point gridPos;
-    private Fretting fretting;
+    private final FrettingViewGrid viewGrid;
+    private final Point gridPos;
+    private final Fretting fretting;
     private int startingFret;
-    private JLabel startingFretLabel;
+    private final JLabel startingFretLabel;
 
     public FrettingView(Fretting fretting) {
         setLayout(null);

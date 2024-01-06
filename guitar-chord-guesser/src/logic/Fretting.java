@@ -14,10 +14,10 @@ public class Fretting {
     public static final int STRING_E2 = 5;
     public static String[] stringNamesEncoded = {"e1", "a", "d", "g", "b", "e2"};
 
-    private int[] fretNumbers;
-    private int barreStart;
-    private int barreEnd;
-    private int barreFret;
+    private final int[] fretNumbers;
+    private final int barreStart;
+    private final int barreEnd;
+    private final int barreFret;
 
     public Fretting(int e1, int a, int d, int g, int b, int e2, int barreStart, int barreEnd, int barreFret) throws Exception {
         if (

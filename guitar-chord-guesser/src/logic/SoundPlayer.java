@@ -15,7 +15,7 @@ public class SoundPlayer {
     public static SoundPlayer instance;
     private Map<String, Clip> noteClips;
     private Map<String, Clip> musicClips;
-    private int strumDelay; // in milliseconds
+    private final int strumDelay; // in milliseconds
     private String currentlyPlayingSong;
 
     private class StringPlayActionListener implements ActionListener {
