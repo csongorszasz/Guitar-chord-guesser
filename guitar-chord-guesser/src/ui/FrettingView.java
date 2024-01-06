@@ -34,7 +34,7 @@ public class FrettingView extends JPanel {
 
         startingFret = 1;
         startingFretLabel = new JLabel();
-        startingFretLabel.setFont(new Font(startingFretLabel.getFont().getName(), Font.PLAIN, 30));
+        startingFretLabel.setFont(new Font(startingFretLabel.getFont().getName(), Font.PLAIN, 25));
         startingFretLabel.setBounds(
                 gridPos.x + viewGrid.getPreferredSize().width + 15,
                 gridPos.y + viewGrid.getFretDistance()/2 - startingFretLabel.getFont().getSize()/2,
