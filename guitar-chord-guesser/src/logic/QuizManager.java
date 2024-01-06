@@ -2,6 +2,7 @@ package logic;
 
 import ui.QuizOptionsGridPanel;
 import ui.QuizPanel;
+import ui.StatisticsPanel;
 
 import java.awt.*;
 import java.io.*;
@@ -26,7 +27,8 @@ public class QuizManager {
     private int questionNumber;
     private int cntCorreclyAnswered;
     private int phase;
-    private List<List<Chord>> chords; /* a list of lists where the inner lists contain chords of the same quality (row1: majors, row2: minors, ...)*/
+    private List<List<Chord>> chords; /* a list of lists where the inner lists contain chords of the same quality (list1: majors, list2: minors, ...)*/
+    private List<QuizRound> scores;
 
     private QuizPanel quizPanel;
     private QuizOptionsGridPanel quizOptionsGridPanel;
@@ -35,7 +37,7 @@ public class QuizManager {
         random = new Random();
         quizMode = 0;
         numOfOptions = 4;
-        numOfQuestions = 2;
+        numOfQuestions = 10;
         chosenChords = new Chord[numOfOptions];
         correctAnswer = 0;
         questionNumber = 0;
@@ -49,6 +51,7 @@ public class QuizManager {
             System.err.println("Error: " + e.getMessage());
         }
 
+        scores = new ArrayList<QuizRound>();
         loadScores();
     }
 
@@ -126,6 +129,14 @@ public class QuizManager {
 
     public void setPhase(int phase) {
         this.phase = phase;
+    }
+
+    public List<QuizRound> getScores() {
+        return scores;
+    }
+
+    public List<String> getQuizModes() {
+        return quizModes;
     }
 
     private void initChords() throws Exception {
@@ -466,6 +477,7 @@ public class QuizManager {
         /* Row format:
          *  <quizmode> <correct_answers> */
 
+        scores.add(new QuizRound(quizMode, cntCorreclyAnswered));
         try {
             FileWriter writer = new FileWriter("src\\data\\scores.txt", true);
             writer.write(quizMode + " " + cntCorreclyAnswered + "\n");
@@ -475,21 +487,18 @@ public class QuizManager {
         }
     }
 
-    /* this loads past scores into the statistics panel */
-    public void loadScores() {
+    private void loadScores() {
         /* Row format:
         *  <quizmode> <correct_answers> */
 
         try {
             BufferedReader reader = new BufferedReader(new FileReader("src\\data\\scores.txt"));
-            List<QuizRound> rounds = reader.lines()
+            scores = reader.lines()
                     .map(line -> {
                         String[] tokens = line.split(" ");
                         return new QuizRound(Integer.parseInt(tokens[0]), Integer.parseInt(tokens[1]));
                     })
-                    .sorted(Comparator.comparing(QuizRound::getQuizMode))
-                    .toList();
-            rounds.forEach(r -> System.out.println(r.getQuizMode() + " " + r.getCorrectAnswers()));
+                    .collect(Collectors.toCollection(ArrayList::new));
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }

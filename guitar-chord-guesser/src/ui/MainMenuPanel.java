@@ -12,6 +12,7 @@ import java.util.List;
 public class MainMenuPanel extends JPanel {
     private MainFrame mainFrame;
     private QuizManager quizManager;
+    private StatisticsPanel statisticsPanel;
 
     private JLabel titleLabel;
     private JPanel buttonsPanel;
@@ -22,7 +23,6 @@ public class MainMenuPanel extends JPanel {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         this.mainFrame = mainFrame;
-
         this.quizManager = quizManager;
 
         titleLabel = new JLabel("Choose a quiz mode");
@@ -38,7 +38,10 @@ public class MainMenuPanel extends JPanel {
         add(Box.createVerticalGlue());
 
         statisticsButton = new JButton("Statistics");
-        statisticsButton.addActionListener(e -> mainFrame.showLayout(MainFrame.VIEW_STATISTICS));
+        statisticsButton.addActionListener(e -> {
+            mainFrame.showLayout(MainFrame.VIEW_STATISTICS);
+            statisticsPanel.update();
+        });
         statisticsButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         add(statisticsButton);
@@ -52,7 +55,7 @@ public class MainMenuPanel extends JPanel {
         addQuizModeButton("Major 7th's");
         addQuizModeButton("Minor 7th's");
         addQuizModeButton("Diminished");
-        addQuizModeButton("ALL");
+        addQuizModeButton("All types");
         add(buttonsPanel);
     }
 
@@ -67,5 +70,9 @@ public class MainMenuPanel extends JPanel {
         });
         modeButtons.add(button);
         buttonsPanel.add(button);
+    }
+
+    public void setStatisticsPanel(StatisticsPanel statisticsPanel) {
+        this.statisticsPanel = statisticsPanel;
     }
 }

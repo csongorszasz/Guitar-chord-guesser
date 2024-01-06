@@ -26,7 +26,8 @@ public class MainFrame extends JFrame {
 
         quizManager = new QuizManager();
         mainMenuPanel = new MainMenuPanel(this, quizManager);
-        statisticsPanel = new StatisticsPanel(this);
+        statisticsPanel = new StatisticsPanel(this, quizManager);
+        mainMenuPanel.setStatisticsPanel(statisticsPanel);
         quizPanel = new QuizPanel(this, quizManager);
 
         cardPanel.add(quizPanel, VIEW_QUIZ);
