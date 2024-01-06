@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.util.Random;
 
 public class Main extends JFrame {
     public Main() {
@@ -40,6 +41,14 @@ public class Main extends JFrame {
     }
 
     public static void main(String[] args) {
-        new Main();
+//        new Main();
+        Random random = new Random();
+        int quizModes = 7;
+        int questions = 10;
+        for (int i = 0; i < 1000; i++) {
+            int randQuizMode = random.nextInt(quizModes);
+            int randCorrectAnswers = random.nextInt(questions+1);
+            System.out.println(randQuizMode + " " + randCorrectAnswers);
+        }
     }
 }

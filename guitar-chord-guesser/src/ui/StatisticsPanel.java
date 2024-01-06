@@ -16,6 +16,7 @@ public class StatisticsPanel extends JPanel {
 
     private JLabel titleLabel;
     private List<JLabel> highScoreLabels;
+    private JLabel averageScoreLabel;
 
     public StatisticsPanel(MainFrame mainFrame, QuizManager quizManager) {
         this.mainFrame = mainFrame;
@@ -48,6 +49,10 @@ public class StatisticsPanel extends JPanel {
             highScoresPanel.add(highScoreLabels.get(i));
         }
 
+        averageScoreLabel = new JLabel();
+        averageScoreLabel.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 20));
+        averageScoreLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
         menuButton = new JButton("Menu");
         menuButton.addActionListener(e -> mainFrame.showLayout(MainFrame.VIEW_MAINMENU));
         menuButton.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -58,6 +63,8 @@ public class StatisticsPanel extends JPanel {
         add(highScoreslabel);
         add(Box.createRigidArea(new Dimension(0, 10)));
         add(highScoresPanel);
+        add(Box.createRigidArea(new Dimension(0, 20)));
+        add(averageScoreLabel);
         add(Box.createVerticalGlue());
         add(menuButton);
         add(Box.createRigidArea(new Dimension(0, 100)));
@@ -77,5 +84,10 @@ public class StatisticsPanel extends JPanel {
                 highScoreLabels.get(i).setText(quizManager.getQuizModes().get(i) + ": " + highScore + "/10");
             }
         }
+
+        double averageScore = quizManager.getScores().stream()
+                .mapToDouble(QuizRound::getCorrectAnswers)
+                .average().orElse(0.0);
+        averageScoreLabel.setText("Overall average score: " + String.format("%.2f", averageScore) + "/10");
     }
 }
