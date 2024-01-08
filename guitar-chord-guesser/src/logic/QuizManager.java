@@ -3,6 +3,7 @@ package logic;
 import ui.QuizOptionsGridPanel;
 import ui.QuizPanel;
 
+import javax.sound.sampled.Clip;
 import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
