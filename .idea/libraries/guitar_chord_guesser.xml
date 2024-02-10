@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="guitar-chord-guesser">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/guitar-chord-guesser/out/artifacts/guitar_chord_guesser_jar/guitar-chord-guesser.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
