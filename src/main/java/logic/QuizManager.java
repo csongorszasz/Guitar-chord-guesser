@@ -499,7 +499,13 @@ public class QuizManager {
                     })
                     .collect(Collectors.toCollection(ArrayList::new));
         } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+            // if file doesn't exist, create it
+            try {
+                File file = new File("src/main/resources/data/scores.txt");
+                file.createNewFile();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
         }
     }
 }
