@@ -2,8 +2,8 @@
 <launch4jConfig>
   <dontWrapJar>false</dontWrapJar>
   <headerType>gui</headerType>
-  <jar>/home/chongy/stuff/workspace/Guitar-chord-guesser/guitar-chord-guesser/build/jar/guitar-chord-guesser.jar</jar>
-  <outfile>/home/chongy/stuff/workspace/Guitar-chord-guesser/guitar-chord-guesser/build/exe/guitar-chord-guesser.exe</outfile>
+  <jar>/home/chongy/stuff/workspace/Guitar-chord-guesser/build/jar/guitar-chord-guesser.jar</jar>
+  <outfile>/home/chongy/stuff/workspace/Guitar-chord-guesser/build/exe/guitar-chord-guesser.exe</outfile>
   <errTitle></errTitle>
   <cmdLine></cmdLine>
   <chdir>.</chdir>
