@@ -1,7 +1,7 @@
-package ui;
+package main.java.ui;
 
-import logic.QuizManager;
-import logic.QuizRound;
+import main.java.logic.QuizManager;
+import main.java.logic.QuizRound;
 
 import javax.swing.*;
 import java.awt.*;

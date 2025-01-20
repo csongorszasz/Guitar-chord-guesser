@@ -1,9 +1,8 @@
-package logic;
+package main.java.logic;
 
-import ui.QuizOptionsGridPanel;
-import ui.QuizPanel;
+import main.java.ui.QuizOptionsGridPanel;
+import main.java.ui.QuizPanel;
 
-import javax.sound.sampled.Clip;
 import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
@@ -479,7 +478,7 @@ public class QuizManager {
 
         scores.add(new QuizRound(quizMode, cntCorreclyAnswered));
         try {
-            FileWriter writer = new FileWriter("data\\scores.txt", true);
+            FileWriter writer = new FileWriter("src/main/resources/data/scores.txt", true);
             writer.write(quizMode + " " + cntCorreclyAnswered + "\n");
             writer.close();
         } catch (IOException e) {
@@ -492,7 +491,7 @@ public class QuizManager {
         *  <quizmode> <correct_answers> */
 
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("data\\scores.txt"));
+            BufferedReader reader = new BufferedReader(new FileReader("src/main/resources/data/scores.txt"));
             scores = reader.lines()
                     .map(line -> {
                         String[] tokens = line.split(" ");

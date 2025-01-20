@@ -1,4 +1,4 @@
-package logic;
+package main.java.logic;
 
 public class Note {
     public final static String C      = "C";

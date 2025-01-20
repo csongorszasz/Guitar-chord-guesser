@@ -1,4 +1,4 @@
-package logic;
+package main.java.logic;
 
 public class Major7ChordFactory implements ChordFactory {
     @Override

@@ -1,12 +1,12 @@
-package logic;
+package main.java.logic;
 
-public class DiminishedChordFactory implements ChordFactory {
+public class Dominant7ChordFactory implements ChordFactory {
     @Override
     public Chord createNormalChord(String base, Fretting fretting) throws Exception {
         if (fretting.isBarre()) {
             throw new Exception("Expected normal fretting, not barre fretting");
         }
-        Chord chord = new Chord(base, Quality.DIMINISHED, fretting);
+        Chord chord = new Chord(base, Quality.DOMINANT7, fretting);
         System.out.println("Created normal chord: " + chord);
         return chord;
     }
@@ -16,7 +16,7 @@ public class DiminishedChordFactory implements ChordFactory {
         if (!fretting.isBarre()) {
             throw new Exception("Expected barre fretting, not normal fretting");
         }
-        Chord chord = new Chord(base, Quality.DIMINISHED, fretting);
+        Chord chord = new Chord(base, Quality.DOMINANT7, fretting);
         System.out.println("Created barre chord: " + chord);
         return chord;
     }

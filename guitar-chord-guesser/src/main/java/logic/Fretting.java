@@ -1,4 +1,4 @@
-package logic;
+package main.java.logic;
 
 public class Fretting {
     public static final int DONT_PLAY = -1;

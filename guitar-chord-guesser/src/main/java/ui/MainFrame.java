@@ -1,7 +1,7 @@
-package ui;
+package main.java.ui;
 
-import logic.QuizManager;
-import logic.SoundPlayer;
+import main.java.logic.QuizManager;
+import main.java.logic.SoundPlayer;
 
 import javax.swing.*;
 import java.awt.*;

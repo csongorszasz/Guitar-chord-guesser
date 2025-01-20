@@ -1,6 +1,6 @@
-package ui;
+package main.java.ui;
 
-import logic.Fretting;
+import main.java.logic.Fretting;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,6 +1,6 @@
-package ui;
+package main.java.ui;
 
-import logic.QuizManager;
+import main.java.logic.QuizManager;
 
 import javax.swing.*;
 import java.awt.*;

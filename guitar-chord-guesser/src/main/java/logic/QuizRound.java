@@ -1,4 +1,4 @@
-package logic;
+package main.java.logic;
 
 public class QuizRound {
     private final int quizMode;

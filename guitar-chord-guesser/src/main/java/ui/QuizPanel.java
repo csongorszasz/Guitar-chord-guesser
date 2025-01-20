@@ -1,6 +1,6 @@
-package ui;
+package main.java.ui;
 
-import logic.*;
+import main.java.logic.*;
 
 import javax.swing.*;
 import java.awt.*;

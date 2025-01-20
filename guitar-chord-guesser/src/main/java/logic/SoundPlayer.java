@@ -1,4 +1,4 @@
-package logic;
+package main.java.logic;
 
 import javax.sound.sampled.*;
 import javax.swing.*;
@@ -42,7 +42,7 @@ public class SoundPlayer {
             }
             else {
                 int fretNumber = fretting.getFretNumbers()[currentStringIdx];
-                String filepath = "audio\\notes\\" + Fretting.stringNamesEncoded[currentStringIdx] + "_" + fretNumber + ".wav";
+                String filepath = "src/main/resources/audio/notes/" + Fretting.stringNamesEncoded[currentStringIdx] + "_" + fretNumber + ".wav";
 
                 if (!playNote(filepath)) {
                     timer.stop();
@@ -107,12 +107,18 @@ public class SoundPlayer {
 
     public void playSong(String filepath) {
         Clip clip = musicClips.get(filepath);
+        if (clip == null) {
+            return;
+        }
         currentlyPlayingSong = filepath;
         clip.loop(Clip.LOOP_CONTINUOUSLY);
         clip.start();
     }
 
     public void stopCurrentlyPlayingSong() {
+        if (currentlyPlayingSong.isEmpty()) {
+            return;
+        }
         Clip clip = musicClips.get(currentlyPlayingSong);
         clip.stop();
     }
@@ -129,13 +135,13 @@ public class SoundPlayer {
             clip.open(audioInputStream);
             return clip;
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
-            System.out.println(e);
+            System.out.println("Error loading audio file: " + e.getMessage() + ": [" + file.getPath() + "]");
         }
         return null;
     }
 
     private void loadNoteSoundFiles() {
-        File[] guitarSoundFiles = new File("audio\\notes").listFiles();
+        File[] guitarSoundFiles = new File("src/main/resources/audio/notes").listFiles();
         if (guitarSoundFiles != null) {
             for (File file : guitarSoundFiles) {
                 Clip clip = loadAudioFile(file);
@@ -145,7 +151,7 @@ public class SoundPlayer {
     }
 
     private void loadMusicFiles() {
-        File[] guitarMusicFiles = new File("audio\\music").listFiles();
+        File[] guitarMusicFiles = new File("src/main/resources/audio/music").listFiles();
         if (guitarMusicFiles != null) {
             for (File file : guitarMusicFiles) {
                 Clip clip = loadAudioFile(file);

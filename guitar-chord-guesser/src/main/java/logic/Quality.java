@@ -1,4 +1,4 @@
-package logic;
+package main.java.logic;
 
 public class Quality {
     public final static String MAJOR          = "";
